@@ -2,7 +2,6 @@ import { useRef, useLayoutEffect } from 'react'
 import { gsap } from '../../lib/gsap'
 import { Container } from '../ui/Container'
 import { Button } from '../ui/Button'
-import { SectionTag } from '../ui/SectionTag'
 import { useMediaQuery } from '../../hooks/useMediaQuery'
 
 const steps = [
@@ -458,7 +457,6 @@ export function StepsSection() {
         <div className="max-w-4xl mx-auto">
           {/* Header */}
           <div className="text-center mb-10 max-md:mb-6">
-            <SectionTag>Como funciona</SectionTag>
             <h2 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-extrabold tracking-[-0.02em] leading-[1.1] text-ajax-black uppercase">
               3 passos pra{' '}
               <span className="text-ajax-purple">comecar hoje</span>
