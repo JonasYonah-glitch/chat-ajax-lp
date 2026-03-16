@@ -412,7 +412,7 @@ export function StepsSection() {
       >
         {/* Large digit — top right corner */}
         <span
-          className="absolute -top-3 -right-1 font-black leading-none text-ajax-purple select-none pointer-events-none transition-opacity duration-300 text-[8rem] max-md:text-[7rem] opacity-[0.10] group-hover:opacity-[0.18]"
+          className="absolute -top-3 -right-1 font-black leading-none text-ajax-purple select-none pointer-events-none transition-opacity duration-300 text-[8rem] max-md:text-[7rem] opacity-[0.22] group-hover:opacity-[0.35]"
           style={{ fontFamily: 'Sora, system-ui, sans-serif' }}
           aria-hidden="true"
         >
