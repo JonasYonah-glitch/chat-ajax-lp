@@ -63,7 +63,7 @@ const features = [
 ]
 
 const SCROLL_PER_FEATURE_DESKTOP = 500
-const SCROLL_PER_FEATURE_MOBILE = 350
+const SCROLL_PER_FEATURE_MOBILE = 600
 
 export function FeaturesStack() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -118,7 +118,7 @@ export function FeaturesStack() {
   return (
     <section ref={sectionRef} className="bg-white relative" id="recursos">
       <div ref={wrapperRef} className="relative">
-        <div className="sticky top-0 min-h-screen flex items-center">
+        <div className="sticky top-0 min-h-screen max-md:min-h-0 max-md:py-10 flex items-center max-md:items-start">
           <Container>
             <div ref={contentRef} className="relative max-w-5xl mx-auto">
               {features.map((f, i) => (
