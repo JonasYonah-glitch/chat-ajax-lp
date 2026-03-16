@@ -8,7 +8,8 @@ import { SectionTitle } from '../ui/SectionTitle'
 import { ChannelCard } from './ChannelCard'
 import { FloatingShapes } from '../backgrounds/FloatingShapes'
 
-const CARD_SCROLL_DISTANCE = 180
+const CARD_SCROLL_DISTANCE_DESKTOP = 180
+const CARD_SCROLL_DISTANCE_MOBILE = 140
 const WRAPPER_PADDING = 120
 
 export function ChannelsSection() {
@@ -20,30 +21,33 @@ export function ChannelsSection() {
 
   // Measure first card height
   useEffect(() => {
-    if (isMobile || !gridRef.current) return
+    if (!gridRef.current) return
     const firstCard = gridRef.current.querySelector('.channel-card') as HTMLElement | null
     if (firstCard) {
       setCardHeight(firstCard.offsetHeight)
     }
   }, [isMobile])
 
-  // Desktop: GSAP scrub-driven card stacking
+  // Scrub-driven card stacking (desktop + mobile)
   useLayoutEffect(() => {
-    if (isMobile || !sectionRef.current || !wrapperRef.current || !gridRef.current) return
+    if (!sectionRef.current || !wrapperRef.current || !gridRef.current) return
 
     const cards = gridRef.current.querySelectorAll('.channel-card')
     if (cards.length === 0) return
 
+    const scrollDist = isMobile ? CARD_SCROLL_DISTANCE_MOBILE : CARD_SCROLL_DISTANCE_DESKTOP
+    const stickyTop = isMobile ? 60 : 100
+
     const ctx = gsap.context(() => {
       const totalCards = cards.length
       const wrapperHeight =
-        (totalCards - 1) * CARD_SCROLL_DISTANCE + cardHeight + WRAPPER_PADDING
+        (totalCards - 1) * scrollDist + cardHeight + WRAPPER_PADDING
 
       gsap.set(wrapperRef.current, { height: wrapperHeight })
 
       gsap.set(gridRef.current, {
         position: 'sticky',
-        top: 100,
+        top: stickyTop,
         height: cardHeight,
       })
 
@@ -64,7 +68,7 @@ export function ChannelsSection() {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: wrapperRef.current,
-          start: 'top 100px',
+          start: `top ${stickyTop}px`,
           end: 'bottom bottom',
           scrub: 1,
           pin: false,
@@ -108,35 +112,6 @@ export function ChannelsSection() {
     return () => ctx.revert()
   }, [isMobile, cardHeight])
 
-  // Mobile: GSAP stagger entrance
-  useLayoutEffect(() => {
-    if (!isMobile || !sectionRef.current) return
-
-    const ctx = gsap.context(() => {
-      const cards = sectionRef.current!.querySelectorAll('.channel-card')
-      cards.forEach((card, i) => {
-        gsap.fromTo(
-          card,
-          { y: 40, opacity: 0 },
-          {
-            scrollTrigger: {
-              trigger: card,
-              start: 'top 92%',
-              once: true,
-            },
-            y: 0,
-            opacity: 1,
-            duration: 0.5,
-            ease: 'power2.out',
-            delay: i * 0.08,
-          }
-        )
-      })
-    })
-
-    return () => ctx.revert()
-  }, [isMobile])
-
   return (
     <section ref={sectionRef} className="py-20 max-md:py-10 bg-white relative" style={{ overflow: 'clip' }} id="canais">
       <FloatingShapes />
@@ -153,27 +128,16 @@ export function ChannelsSection() {
           />
         </div>
 
-        {isMobile ? (
-          /* Mobile: simple flex column */
-          <div className="flex flex-col gap-5">
+        {/* Scroll-stacking wrapper (desktop + mobile) */}
+        <div ref={wrapperRef} className="relative">
+          <div ref={gridRef} className="relative max-w-[860px] mx-auto">
             {channels.map(channel => (
               <div key={channel.id} className="channel-card">
                 <ChannelCard channel={channel} />
               </div>
             ))}
           </div>
-        ) : (
-          /* Desktop: scroll-stacking wrapper */
-          <div ref={wrapperRef} className="relative">
-            <div ref={gridRef} className="relative max-w-[860px] mx-auto">
-              {channels.map(channel => (
-                <div key={channel.id} className="channel-card">
-                  <ChannelCard channel={channel} />
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
+        </div>
       </Container>
     </section>
   )

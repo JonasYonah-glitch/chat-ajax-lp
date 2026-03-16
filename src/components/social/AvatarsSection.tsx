@@ -95,27 +95,21 @@ export function AvatarsSection() {
         },
       })
 
-      if (isMobile) {
-        wrapper.style.height = 'auto'
-        gsap.delayedCall(2, () => {
-          gsap.to(p1, { opacity: 0, y: -20, duration: 0.5 })
-          gsap.to(p2, { opacity: 1, y: 0, duration: 0.5, delay: 0.2 })
-        })
-      } else {
-        wrapper.style.height = '250vh'
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: wrapper,
-            start: 'top top',
-            end: 'bottom bottom',
-            scrub: 0.5,
-          },
-        })
-        tl.to({}, { duration: 0.4 })
-        tl.to(p1, { opacity: 0, y: -30, duration: 0.3, ease: 'none' })
-        tl.to(p2, { opacity: 1, y: 0, duration: 0.3, ease: 'none' }, '<0.1')
-        tl.to({}, { duration: 0.4 })
-      }
+      const scrollHeight = isMobile ? '180vh' : '250vh'
+      wrapper.style.height = scrollHeight
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: wrapper,
+          start: 'top top',
+          end: 'bottom bottom',
+          scrub: 0.5,
+        },
+      })
+      tl.to({}, { duration: 0.4 })
+      tl.to(p1, { opacity: 0, y: -30, duration: 0.3, ease: 'none' })
+      tl.to(p2, { opacity: 1, y: 0, duration: 0.3, ease: 'none' }, '<0.1')
+      tl.to({}, { duration: 0.4 })
     })
 
     return () => ctx.revert()
@@ -124,7 +118,7 @@ export function AvatarsSection() {
   return (
     <section ref={sectionRef} className="bg-white relative" id="avatarsSection">
       <div ref={wrapperRef} className="relative">
-        <div className={`${isMobile ? 'static min-h-0 py-14 px-6' : 'sticky top-0 min-h-screen'} flex flex-col items-center justify-center px-6 py-10`}>
+        <div className="sticky top-0 min-h-screen flex flex-col items-center justify-center px-6 py-10">
           <Container>
             <div className="flex justify-center gap-10 flex-wrap max-w-[1000px] mx-auto max-md:gap-4">
               {topRow.map((p, i) => <Person key={i} {...p} />)}

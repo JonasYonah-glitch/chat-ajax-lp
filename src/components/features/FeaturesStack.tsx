@@ -62,7 +62,8 @@ const features = [
   },
 ]
 
-const SCROLL_PER_FEATURE = 500
+const SCROLL_PER_FEATURE_DESKTOP = 500
+const SCROLL_PER_FEATURE_MOBILE = 350
 
 export function FeaturesStack() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -70,16 +71,18 @@ export function FeaturesStack() {
   const contentRef = useRef<HTMLDivElement>(null)
   const isMobile = useMediaQuery('(max-width: 1024px)')
 
-  // Desktop: scroll-stacking crossfade between features
+  // Scroll-stacking crossfade between features (desktop + mobile)
   useLayoutEffect(() => {
-    if (isMobile || !sectionRef.current || !wrapperRef.current || !contentRef.current) return
+    if (!sectionRef.current || !wrapperRef.current || !contentRef.current) return
 
     const cards = contentRef.current.querySelectorAll<HTMLElement>('.feature-slide')
     if (cards.length === 0) return
 
+    const scrollPer = isMobile ? SCROLL_PER_FEATURE_MOBILE : SCROLL_PER_FEATURE_DESKTOP
+
     const ctx = gsap.context(() => {
       const total = cards.length
-      const wrapperHeight = (total - 1) * SCROLL_PER_FEATURE + window.innerHeight + 200
+      const wrapperHeight = (total - 1) * scrollPer + window.innerHeight + 200
 
       gsap.set(wrapperRef.current, { height: wrapperHeight })
 
@@ -111,35 +114,6 @@ export function FeaturesStack() {
 
     return () => ctx.revert()
   }, [isMobile])
-
-  // Mobile: simple stagger entrance
-  useLayoutEffect(() => {
-    if (!isMobile || !sectionRef.current) return
-    const ctx = gsap.context(() => {
-      const cards = sectionRef.current!.querySelectorAll('.feature-slide')
-      cards.forEach((card, i) => {
-        gsap.fromTo(card,
-          { y: 30, opacity: 0 },
-          { scrollTrigger: { trigger: card, start: 'top 90%', once: true }, y: 0, opacity: 1, duration: 0.5, ease: 'power2.out', delay: i * 0.05 },
-        )
-      })
-    })
-    return () => ctx.revert()
-  }, [isMobile])
-
-  if (isMobile) {
-    return (
-      <section ref={sectionRef} className="bg-white" id="recursos">
-        <Container>
-          <div className="flex flex-col gap-16 py-14">
-            {features.map((f, i) => (
-              <FeatureCard key={i} feature={f} />
-            ))}
-          </div>
-        </Container>
-      </section>
-    )
-  }
 
   return (
     <section ref={sectionRef} className="bg-white relative" id="recursos">
