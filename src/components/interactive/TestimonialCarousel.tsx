@@ -107,9 +107,9 @@ export function TestimonialCarousel() {
   }
 
   return (
-    <section className="py-20 max-md:py-10 bg-white" id="depoimentos">
+    <section className="py-14 max-md:py-8 bg-white" id="depoimentos">
       <Container>
-        <div className="text-center mb-12">
+        <div className="text-center mb-8 max-md:mb-5">
           <SectionTag>Depoimentos</SectionTag>
           <SectionTitle
             title={
@@ -121,13 +121,13 @@ export function TestimonialCarousel() {
           />
         </div>
 
-        <div className="relative max-w-[960px] mx-auto">
+        <div className="relative max-w-[820px] mx-auto">
           {/* Carousel viewport — hard border */}
           <div
             className="overflow-hidden border-2 border-[#131313] cursor-grab active:cursor-grabbing select-none"
             style={{
               borderRadius: 0,
-              boxShadow: `${testimonials[current] ? '8px 8px 0 #5E17EB' : '8px 8px 0 #131313'}`,
+              boxShadow: `${testimonials[current] ? '6px 6px 0 #5E17EB' : '6px 6px 0 #131313'}`,
               transition: 'box-shadow 0.3s ease',
             }}
             onMouseDown={handleMouseDown}
@@ -150,12 +150,12 @@ export function TestimonialCarousel() {
               {testimonials.map((t, index) => (
                 <div
                   key={index}
-                  className="grid grid-cols-[1fr_1.1fr] max-md:grid-cols-1"
+                  className="grid grid-cols-[0.8fr_1.2fr] max-md:grid-cols-1"
                   style={{ width: `${100 / total}%` }}
                 >
                   {/* Left: photo on colored grid */}
                   <div
-                    className="relative flex items-center justify-center p-10 max-md:p-6 min-h-[440px] max-md:min-h-[280px] overflow-hidden"
+                    className="relative flex items-center justify-center p-6 max-md:p-4 min-h-[320px] max-md:min-h-[200px] overflow-hidden"
                     style={{ backgroundColor: t.brandColor }}
                   >
                     {/* Grid overlay */}
@@ -163,15 +163,15 @@ export function TestimonialCarousel() {
                       className="absolute inset-0 pointer-events-none z-0"
                       style={{
                         backgroundImage: `linear-gradient(to right, rgba(255,255,255,.15) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,.15) 1px, transparent 1px)`,
-                        backgroundSize: '80px 80px',
+                        backgroundSize: '60px 60px',
                       }}
                       aria-hidden="true"
                     />
 
                     {/* Large decorative quote mark */}
                     <div
-                      className="absolute top-4 left-4 text-white/20 font-extrabold leading-none select-none"
-                      style={{ fontSize: '120px', lineHeight: 1 }}
+                      className="absolute top-2 left-3 text-white/20 font-extrabold leading-none select-none max-md:text-[60px]"
+                      style={{ fontSize: '80px', lineHeight: 1 }}
                       aria-hidden="true"
                     >
                       "
@@ -181,41 +181,41 @@ export function TestimonialCarousel() {
                     <img
                       src={t.avatar}
                       alt={t.name}
-                      className="relative z-[1] w-[70%] aspect-[3/4] object-cover object-top"
+                      className="relative z-[1] w-[65%] max-md:w-[45%] aspect-[3/4] object-cover object-top"
                       loading="lazy"
                     />
                   </div>
 
                   {/* Right: quote */}
-                  <div className="bg-white p-10 max-md:p-8 flex flex-col justify-center">
+                  <div className="bg-white p-7 max-md:p-5 flex flex-col justify-center">
                     {/* Star rating */}
-                    <div className="flex gap-1 mb-5" aria-label="Avaliacao 5 de 5 estrelas">
+                    <div className="flex gap-1 mb-3" aria-label="Avaliacao 5 de 5 estrelas">
                       {Array.from({ length: 5 }).map((_, i) => (
-                        <StarIcon key={i} size={16} className="text-[#5E17EB]" />
+                        <StarIcon key={i} size={14} className="text-[#5E17EB]" />
                       ))}
                     </div>
 
                     {/* Large decorative quote mark — purple */}
                     <svg
-                      width="40"
-                      height="40"
+                      width="28"
+                      height="28"
                       viewBox="0 0 24 24"
                       fill="#5E17EB"
-                      className="mb-5 shrink-0 opacity-60"
+                      className="mb-3 shrink-0 opacity-60"
                       aria-hidden="true"
                     >
                       <path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 0 1-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179m10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 0 1-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179" />
                     </svg>
 
-                    <blockquote className="text-base text-[#131313]/80 leading-[1.8] mb-8 italic">
+                    <blockquote className="text-sm max-md:text-[13px] text-[#131313]/80 leading-[1.7] mb-5 max-md:mb-4 italic">
                       {t.quote}
                     </blockquote>
 
-                    <div className="border-t-2 border-[#131313]/10 pt-5">
-                      <p className="text-xs font-bold text-[#131313] tracking-[0.12em] uppercase">
+                    <div className="border-t-2 border-[#131313]/10 pt-4">
+                      <p className="text-[11px] font-bold text-[#131313] tracking-[0.12em] uppercase">
                         {t.name}, {t.role}
                       </p>
-                      <p className="text-xs font-semibold text-[#131313]/50 tracking-[0.1em] uppercase mt-0.5">
+                      <p className="text-[11px] font-semibold text-[#131313]/50 tracking-[0.1em] uppercase mt-0.5">
                         {t.company}
                       </p>
                     </div>
@@ -226,18 +226,18 @@ export function TestimonialCarousel() {
           </div>
 
           {/* Navigation — arrows + square dots */}
-          <div className="flex items-center justify-center gap-4 mt-8">
+          <div className="flex items-center justify-center gap-3 mt-6">
             {/* Prev arrow */}
             <button
               onClick={() => {
                 prev()
                 handleUserInteraction()
               }}
-              className="w-[44px] h-[44px] border-2 border-[#131313] bg-white flex items-center justify-center cursor-pointer hover:border-[#5E17EB] hover:text-[#5E17EB] hover:shadow-[4px_4px_0_#5E17EB] transition-all duration-200 text-[#131313]"
+              className="w-[38px] h-[38px] border-2 border-[#131313] bg-white flex items-center justify-center cursor-pointer hover:border-[#5E17EB] hover:text-[#5E17EB] hover:shadow-[3px_3px_0_#5E17EB] transition-all duration-200 text-[#131313]"
               style={{ borderRadius: 0 }}
               aria-label="Depoimento anterior"
             >
-              <SolarIcon icon="solar:arrow-left-linear" size={16} />
+              <SolarIcon icon="solar:arrow-left-linear" size={14} />
             </button>
 
             {/* Square dots */}
@@ -254,8 +254,8 @@ export function TestimonialCarousel() {
                   aria-label={`Depoimento ${i + 1}`}
                   className="transition-all duration-200"
                   style={{
-                    width: i === current ? '20px' : '10px',
-                    height: '10px',
+                    width: i === current ? '18px' : '8px',
+                    height: '8px',
                     borderRadius: 0,
                     border: '2px solid',
                     borderColor: i === current ? '#5E17EB' : '#131313',
@@ -273,11 +273,11 @@ export function TestimonialCarousel() {
                 next()
                 handleUserInteraction()
               }}
-              className="w-[44px] h-[44px] border-2 border-[#131313] bg-white flex items-center justify-center cursor-pointer hover:border-[#5E17EB] hover:text-[#5E17EB] hover:shadow-[4px_4px_0_#5E17EB] transition-all duration-200 text-[#131313]"
+              className="w-[38px] h-[38px] border-2 border-[#131313] bg-white flex items-center justify-center cursor-pointer hover:border-[#5E17EB] hover:text-[#5E17EB] hover:shadow-[3px_3px_0_#5E17EB] transition-all duration-200 text-[#131313]"
               style={{ borderRadius: 0 }}
               aria-label="Proximo depoimento"
             >
-              <SolarIcon icon="solar:arrow-right-linear" size={16} />
+              <SolarIcon icon="solar:arrow-right-linear" size={14} />
             </button>
           </div>
         </div>
