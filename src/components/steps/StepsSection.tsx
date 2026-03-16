@@ -351,22 +351,39 @@ export function StepsSection() {
     return () => ctx.revert()
   }, [isMobile])
 
-  /* ── Mobile: stagger entrance ── */
+  /* ── Mobile: scroll-stacking ── */
   useLayoutEffect(() => {
-    if (!isMobile || !sectionRef.current) return
+    if (!isMobile || !wrapperRef.current || !gridRef.current) return
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
+    const cards = gridRef.current.querySelectorAll<HTMLElement>('.step-card')
+    if (cards.length === 0) return
+
+    const cardH = cards[0].offsetHeight || 300
+
     const ctx = gsap.context(() => {
-      const cards = sectionRef.current!.querySelectorAll('.step-card')
+      const totalCards = cards.length
+      const wrapperHeight = (totalCards - 1) * 200 + cardH + 120
+
+      gsap.set(wrapperRef.current, { height: wrapperHeight })
+      gsap.set(gridRef.current, { position: 'sticky', top: 72, height: cardH })
+
       cards.forEach((card, i) => {
-        gsap.fromTo(card,
-          { y: 30, opacity: 0 },
-          {
-            scrollTrigger: { trigger: card, start: 'top 90%', once: true },
-            y: 0, opacity: 1, duration: 0.5, ease: 'power2.out', delay: i * 0.1,
-          },
-        )
+        gsap.set(card, { position: 'absolute', top: 0, left: 0, width: '100%', zIndex: i })
+        if (i > 0) gsap.set(card, { opacity: 0, y: 40 })
       })
+
+      const tl = gsap.timeline({
+        scrollTrigger: { trigger: wrapperRef.current, start: 'top 72px', end: 'bottom bottom', scrub: 1 },
+      })
+
+      tl.to({}, { duration: 0.25 })
+      for (let i = 0; i < totalCards - 1; i++) {
+        tl.to(cards[i], { scale: 0.93, y: -12, opacity: 0, duration: 0.5, ease: 'power1.inOut' }, `s-${i}`)
+        tl.to(cards[i + 1], { opacity: 1, y: 0, duration: 0.5, ease: 'power1.inOut' }, `s-${i}`)
+        if (i < totalCards - 2) tl.to({}, { duration: 0.25 })
+      }
+      tl.to({}, { duration: 0.25 })
     })
 
     return () => ctx.revert()
@@ -412,40 +429,38 @@ export function StepsSection() {
     )
   }
 
-  /* ── Render card (mobile) — horizontal layout ── */
+  /* ── Render card (mobile) — vertical with large scene ── */
   const renderCardMobile = (step: typeof steps[0], idx: number) => {
     const SceneComp = sceneComponents[idx]
     return (
       <div
         key={step.digit}
-        className="step-card group bg-white border-2 border-ajax-black/10 relative overflow-hidden transition-all duration-300"
+        className="step-card group bg-white border-2 border-ajax-black/10 relative overflow-hidden"
       >
         {/* Large digit — top right */}
         <span
-          className="absolute -top-2 -right-1 font-black leading-none text-ajax-purple select-none pointer-events-none text-[5.5rem] opacity-[0.15]"
+          className="absolute -top-2 -right-1 font-black leading-none text-ajax-purple select-none pointer-events-none text-[6rem] opacity-[0.18]"
           style={{ fontFamily: 'Sora, system-ui, sans-serif' }}
           aria-hidden="true"
         >
           {step.digit}
         </span>
 
-        <div className="relative z-[1] flex items-center gap-4 p-4">
-          {/* Scene — compact */}
-          <div className="shrink-0 w-[90px] h-[90px] bg-ajax-surface/60 border border-ajax-black/5 flex items-center justify-center overflow-hidden">
-            <div className="scale-[0.7] origin-center">
-              <SceneComp />
-            </div>
+        {/* Scene — full width */}
+        <div className="relative z-[1] bg-ajax-surface/60 border-b-2 border-ajax-black/5 h-[130px] flex items-center justify-center overflow-hidden">
+          <div className="scale-[0.95] origin-center">
+            <SceneComp />
           </div>
+        </div>
 
-          {/* Text */}
-          <div className="min-w-0 flex-1">
-            <h3 className="text-[15px] font-extrabold text-ajax-black uppercase tracking-[-0.01em] mb-1">
-              {step.title}
-            </h3>
-            <p className="text-[12px] text-ajax-black/55 leading-[1.6]">
-              {step.description}
-            </p>
-          </div>
+        {/* Text */}
+        <div className="relative z-[1] p-5">
+          <h3 className="text-base font-extrabold text-ajax-black uppercase tracking-[-0.01em] mb-1.5">
+            {step.title}
+          </h3>
+          <p className="text-[13px] text-ajax-black/55 leading-[1.6]">
+            {step.description}
+          </p>
         </div>
       </div>
     )
@@ -458,16 +473,18 @@ export function StepsSection() {
           {/* Header */}
           <div className="text-center mb-10 max-md:mb-6">
             <h2 className="text-[1.65rem] sm:text-3xl lg:text-4xl font-extrabold tracking-[-0.02em] leading-[1.15] text-ajax-black uppercase">
-              3 passos pra{' '}
+              3 passos pra<br />
               <span className="text-ajax-purple">comecar hoje</span>
             </h2>
             <div className="w-16 h-[3px] bg-ajax-purple mx-auto mt-3" aria-hidden="true" />
           </div>
 
           {isMobile ? (
-            /* Mobile: vertical list, compact horizontal cards */
-            <div className="flex flex-col gap-4">
-              {steps.map((step, idx) => renderCardMobile(step, idx))}
+            /* Mobile: scroll-stacking cards */
+            <div ref={wrapperRef} className="relative">
+              <div ref={gridRef} className="relative">
+                {steps.map((step, idx) => renderCardMobile(step, idx))}
+              </div>
             </div>
           ) : (
             /* Desktop: 3-col grid */
