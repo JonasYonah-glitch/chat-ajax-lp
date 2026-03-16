@@ -356,17 +356,19 @@ export function StepsSection() {
     if (!isMobile || !wrapperRef.current || !gridRef.current) return
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
-    const cards = gridRef.current.querySelectorAll<HTMLElement>('.step-card')
+    const cards = gridRef.current!.querySelectorAll<HTMLElement>('.step-card')
     if (cards.length === 0) return
 
     const cardH = cards[0].offsetHeight || 300
+    const titleH = gridRef.current.querySelector('.steps-title')?.getBoundingClientRect().height || 80
 
     const ctx = gsap.context(() => {
       const totalCards = cards.length
-      const wrapperHeight = (totalCards - 1) * 350 + cardH + 200
+      const stickyHeight = titleH + 16 + cardH
+      const wrapperHeight = (totalCards - 1) * 400 + stickyHeight + 150
 
       gsap.set(wrapperRef.current, { height: wrapperHeight })
-      gsap.set(gridRef.current, { position: 'sticky', top: 160, height: cardH })
+      gsap.set(gridRef.current, { position: 'sticky', top: 70, height: stickyHeight })
 
       cards.forEach((card, i) => {
         gsap.set(card, { position: 'absolute', top: 0, left: 0, width: '100%', zIndex: i })
@@ -374,7 +376,7 @@ export function StepsSection() {
       })
 
       const tl = gsap.timeline({
-        scrollTrigger: { trigger: wrapperRef.current, start: 'top 160px', end: 'bottom bottom', scrub: 1 },
+        scrollTrigger: { trigger: wrapperRef.current, start: 'top 70px', end: 'bottom bottom', scrub: 1 },
       })
 
       tl.to({}, { duration: 0.25 })
@@ -470,30 +472,41 @@ export function StepsSection() {
     <section ref={sectionRef} className="py-16 max-md:py-10 bg-ajax-surface" id="como-funciona">
       <Container>
         <div className="max-w-4xl mx-auto">
-          {/* Header */}
-          <div className="text-center mb-10 max-md:mb-6">
-            <h2 className="text-[1.65rem] sm:text-3xl lg:text-4xl font-extrabold tracking-[-0.02em] leading-[1.15] text-ajax-black uppercase">
-              3 passos pra<br />
-              <span className="text-ajax-purple">comecar hoje</span>
-            </h2>
-            <div className="w-16 h-[3px] bg-ajax-purple mx-auto mt-3" aria-hidden="true" />
-          </div>
-
           {isMobile ? (
-            /* Mobile: scroll-stacking cards */
+            /* Mobile: title + scroll-stacking cards together */
             <div ref={wrapperRef} className="relative">
               <div ref={gridRef} className="relative">
-                {steps.map((step, idx) => renderCardMobile(step, idx))}
+                {/* Title — stays visible, part of sticky block */}
+                <div className="steps-title text-center mb-4">
+                  <h2 className="text-[1.65rem] font-extrabold tracking-[-0.02em] leading-[1.15] text-ajax-black uppercase">
+                    3 passos pra<br />
+                    <span className="text-ajax-purple">comecar hoje</span>
+                  </h2>
+                  <div className="w-16 h-[3px] bg-ajax-purple mx-auto mt-3" aria-hidden="true" />
+                </div>
+                {/* Cards container — stacked */}
+                <div className="relative">
+                  {steps.map((step, idx) => renderCardMobile(step, idx))}
+                </div>
               </div>
             </div>
           ) : (
-            /* Desktop: 3-col grid */
+            /* Desktop: title + 3-col grid */
+            <>
+            <div className="text-center mb-10">
+              <h2 className="text-3xl lg:text-4xl font-extrabold tracking-[-0.02em] leading-[1.15] text-ajax-black uppercase">
+                3 passos pra<br />
+                <span className="text-ajax-purple">comecar hoje</span>
+              </h2>
+              <div className="w-16 h-[3px] bg-ajax-purple mx-auto mt-3" aria-hidden="true" />
+            </div>
             <div className="relative grid grid-cols-3 gap-7">
               <div className="absolute top-[60px] left-[calc(33.33%+14px)] right-[calc(33.33%+14px)] pointer-events-none z-0" aria-hidden="true">
                 <div className="step-connector h-[2px] w-full opacity-25" style={{ backgroundImage: 'repeating-linear-gradient(90deg, #5E17EB 0, #5E17EB 6px, transparent 6px, transparent 12px)' }} />
               </div>
               {steps.map((step, idx) => renderCardDesktop(step, idx))}
             </div>
+            </>
           )}
 
           <div className="flex justify-center mt-10 max-md:mt-8">
