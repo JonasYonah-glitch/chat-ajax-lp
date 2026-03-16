@@ -96,21 +96,36 @@ export function AvatarsSection() {
         },
       })
 
-      const scrollHeight = isMobile ? '300vh' : '250vh'
-      wrapper.style.height = scrollHeight
+      if (isMobile) {
+        // Mobile: simple trigger — swap text when section reaches center
+        wrapper.style.height = 'auto'
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: wrapper,
-          start: 'top top',
-          end: 'bottom bottom',
-          scrub: 0.5,
-        },
-      })
-      tl.to({}, { duration: 0.4 })
-      tl.to(p1, { opacity: 0, y: -30, duration: 0.3, ease: 'none' })
-      tl.to(p2, { opacity: 1, y: 0, duration: 0.3, ease: 'none' }, '<0.1')
-      tl.to({}, { duration: 0.4 })
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: p1,
+            start: 'top 40%',
+            once: true,
+          },
+        })
+        tl.to(p1, { opacity: 0, y: -20, duration: 0.6, ease: 'power2.inOut', delay: 1.5 })
+        tl.to(p2, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, '-=0.3')
+      } else {
+        // Desktop: scroll-scrub driven swap
+        wrapper.style.height = '250vh'
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: wrapper,
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: 0.5,
+          },
+        })
+        tl.to({}, { duration: 0.4 })
+        tl.to(p1, { opacity: 0, y: -30, duration: 0.3, ease: 'none' })
+        tl.to(p2, { opacity: 1, y: 0, duration: 0.3, ease: 'none' }, '<0.1')
+        tl.to({}, { duration: 0.4 })
+      }
     })
 
     return () => ctx.revert()
@@ -119,7 +134,7 @@ export function AvatarsSection() {
   return (
     <section ref={sectionRef} className="bg-white relative" id="avatarsSection">
       <div ref={wrapperRef} className="relative">
-        <div className="sticky top-0 min-h-screen flex flex-col items-center justify-center px-6 py-10">
+        <div className={`${isMobile ? 'py-14 px-6' : 'sticky top-0 min-h-screen px-6 py-10'} flex flex-col items-center justify-center`}>
           <Container>
             <div className="flex justify-center gap-10 flex-wrap max-w-[1000px] mx-auto max-md:gap-3">
               {topRow.map((p, i) => <Person key={i} {...p} />)}
