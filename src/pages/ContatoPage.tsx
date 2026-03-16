@@ -59,7 +59,7 @@ export default function ContatoPage() {
                         </svg>
                       ),
                       title: 'Email',
-                      content: <a href="mailto:contato@chatajax.com" className="text-[#5E17EB] text-[.85rem] no-underline hover:underline">contato@chatajax.com</a>,
+                      content: <a href="mailto:contato@ajax.dev.br" className="text-[#5E17EB] text-[.85rem] no-underline hover:underline">contato@ajax.dev.br</a>,
                     },
                     {
                       icon: (

@@ -14,6 +14,7 @@ const NAV_LINKS = [
 export function Nav() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [scrollProgress, setScrollProgress] = useState(0)
   const toggleRef = useRef<HTMLButtonElement>(null)
   const overlayRef = useRef<HTMLDivElement>(null)
   const linksRef = useRef<HTMLElement[]>([])
@@ -28,6 +29,17 @@ export function Nav() {
       onLeaveBack: () => setScrolled(false),
     })
     return () => trigger.kill()
+  }, [])
+
+  // Scroll progress bar
+  useEffect(() => {
+    const onScroll = () => {
+      const scrollTop = window.scrollY
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight
+      setScrollProgress(docHeight > 0 ? scrollTop / docHeight : 0)
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
   // Escape key handler
@@ -98,7 +110,7 @@ export function Nav() {
         {/* Logo */}
         <Link to="/" className="no-underline flex items-center shrink-0" aria-label="Chat Ajax — pagina inicial">
           <img
-            src="/Logos/PRETO.svg"
+            src="/Logos/logo ajax hub preto.svg"
             alt="Ajax Hub"
             className="h-8 md:h-10"
           />
@@ -121,16 +133,24 @@ export function Nav() {
           })}
         </div>
 
-        {/* Right side: CTA */}
-        <div className="hidden md:flex items-center gap-4">
+        {/* Right side: Login + CTA */}
+        <div className="hidden md:flex items-center gap-3">
           <a
-            href={isHome ? '#start' : '/#start'}
+            href="https://chat.ajax.dev.br"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center h-9 px-5 border-2 border-ajax-black text-ajax-black text-xs font-bold uppercase tracking-[0.15em] no-underline transition-all duration-200 hover:border-ajax-purple hover:text-ajax-purple hover:shadow-[4px_4px_0_#5E17EB]"
+          >
+            LOGIN
+          </a>
+          <a
+            href={isHome ? '#precos' : '/#precos'}
             className="inline-flex items-center justify-center h-9 px-5 bg-ajax-purple text-white text-xs font-bold uppercase tracking-[0.15em] no-underline transition-all duration-200 hover:bg-ajax-purple-mid"
             style={{ boxShadow: '4px 4px 0 #131313' }}
             onMouseEnter={e => (e.currentTarget.style.boxShadow = '8px 8px 0 #131313')}
             onMouseLeave={e => (e.currentTarget.style.boxShadow = '4px 4px 0 #131313')}
           >
-            TESTE GRATIS
+            COMECAR AGORA
           </a>
         </div>
 
@@ -146,6 +166,14 @@ export function Nav() {
           <span className={`block w-6 h-0.5 bg-ajax-black transition-all duration-300 ${menuOpen ? 'opacity-0' : ''}`} />
           <span className={`block w-6 h-0.5 bg-ajax-black transition-all duration-300 ${menuOpen ? '-rotate-45 translate-x-[5px] -translate-y-[5px]' : ''}`} />
         </button>
+      </div>
+
+      {/* Scroll progress bar */}
+      <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-transparent">
+        <div
+          className="h-full bg-ajax-purple origin-left transition-none"
+          style={{ transform: `scaleX(${scrollProgress})` }}
+        />
       </div>
 
       {/* Mobile overlay */}
@@ -181,14 +209,23 @@ export function Nav() {
           })}
         </nav>
 
-        <div className="mt-10 flex flex-col gap-4">
+        <div className="mt-10 flex flex-col gap-3">
           <a
-            href={isHome ? '#start' : '/#start'}
+            href="https://chat.ajax.dev.br"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={closeMenu}
+            className="w-full h-12 flex items-center justify-center border-2 border-ajax-black text-ajax-black text-sm font-bold uppercase tracking-[0.15em] no-underline"
+          >
+            LOGIN
+          </a>
+          <a
+            href={isHome ? '#precos' : '/#precos'}
             onClick={closeMenu}
             className="w-full h-12 flex items-center justify-center bg-ajax-purple text-white text-sm font-bold uppercase tracking-[0.15em] no-underline"
             style={{ boxShadow: '4px 4px 0 #131313' }}
           >
-            TESTE GRATIS
+            COMECAR AGORA
           </a>
         </div>
       </div>

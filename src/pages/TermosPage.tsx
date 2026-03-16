@@ -22,7 +22,7 @@ export default function TermosPage() {
             <div className="prose-custom">
               <h2>1. Aceitacao dos Termos</h2>
               <p>
-                Ao acessar e utilizar a plataforma Chat Ajax ("Servico"), voce concorda com estes Termos de Uso. Se voce nao concorda com algum destes termos, nao utilize o Servico.
+                Ao acessar e utilizar a plataforma Chat Ajax ("Servico"), desenvolvida pela Ajax Hub, voce concorda com estes Termos de Uso. Se voce nao concorda com algum destes termos, nao utilize o Servico.
               </p>
 
               <h2>2. Descricao do Servico</h2>
@@ -57,7 +57,7 @@ export default function TermosPage() {
 
               <h2>6. Propriedade Intelectual</h2>
               <p>
-                Todo o conteudo, design, codigo e marcas do Chat Ajax sao propriedade exclusiva da empresa. Voce mantem a propriedade dos dados que insere na plataforma.
+                Todo o conteudo, design, codigo e marcas do Chat Ajax sao propriedade exclusiva da Ajax Hub. Voce mantem a propriedade dos dados que insere na plataforma.
               </p>
 
               <h2>7. Disponibilidade do Servico</h2>
@@ -67,7 +67,7 @@ export default function TermosPage() {
 
               <h2>8. Limitacao de Responsabilidade</h2>
               <p>
-                O Chat Ajax nao se responsabiliza por danos indiretos, incidentais ou consequenciais decorrentes do uso ou impossibilidade de uso do Servico. Nossa responsabilidade total esta limitada ao valor pago nos ultimos 12 meses.
+                A Ajax Hub nao se responsabiliza por danos indiretos, incidentais ou consequenciais decorrentes do uso ou impossibilidade de uso do Servico. Nossa responsabilidade total esta limitada ao valor pago nos ultimos 12 meses.
               </p>
 
               <h2>9. Rescisao</h2>
@@ -87,7 +87,7 @@ export default function TermosPage() {
 
               <h2>12. Contato</h2>
               <p>
-                Para duvidas sobre estes Termos, entre em contato pelo email <a href="mailto:contato@chatajax.com">contato@chatajax.com</a>.
+                Para duvidas sobre estes Termos, entre em contato pelo email <a href="mailto:contato@ajax.dev.br">contato@ajax.dev.br</a> ou pelo <a href="https://wa.me/554896249916">WhatsApp</a>.
               </p>
             </div>
           </div>

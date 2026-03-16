@@ -22,7 +22,7 @@ export default function PrivacidadePage() {
             <div className="prose-custom">
               <h2>1. Introducao</h2>
               <p>
-                O Chat Ajax ("nos") valoriza sua privacidade. Esta Politica descreve como coletamos, usamos, armazenamos e protegemos seus dados pessoais em conformidade com a Lei Geral de Protecao de Dados (LGPD - Lei 13.709/2018).
+                A Ajax Hub ("nos"), desenvolvedora do Chat Ajax, valoriza sua privacidade. Esta Politica descreve como coletamos, usamos, armazenamos e protegemos seus dados pessoais em conformidade com a Lei Geral de Protecao de Dados (LGPD - Lei 13.709/2018).
               </p>
 
               <h2>2. Dados que Coletamos</h2>
@@ -62,7 +62,7 @@ export default function PrivacidadePage() {
               <h2>5. Compartilhamento de Dados</h2>
               <p>Seus dados podem ser compartilhados com:</p>
               <ul>
-                <li><strong>Processadores de pagamento:</strong> Asaas, para processar transacoes financeiras</li>
+                <li><strong>Processadores de pagamento:</strong> para processar transacoes financeiras de forma segura</li>
                 <li><strong>Provedores de infraestrutura:</strong> servidores hospedados no Brasil</li>
                 <li><strong>Autoridades competentes:</strong> quando exigido por lei ou ordem judicial</li>
               </ul>
@@ -88,7 +88,7 @@ export default function PrivacidadePage() {
                 <li>Revogar consentimento a qualquer momento</li>
               </ul>
               <p>
-                Para exercer seus direitos, envie um email para <a href="mailto:privacidade@chatajax.com">privacidade@chatajax.com</a>. Responderemos em ate 15 dias uteis.
+                Para exercer seus direitos, envie um email para <a href="mailto:privacidade@ajax.dev.br">privacidade@ajax.dev.br</a>. Responderemos em ate 15 dias uteis.
               </p>
 
               <h2>8. Retencao de Dados</h2>
@@ -114,7 +114,7 @@ export default function PrivacidadePage() {
                 Para questoes relacionadas a privacidade e protecao de dados, entre em contato com nosso Encarregado de Dados (DPO):
               </p>
               <p>
-                Email: <a href="mailto:privacidade@chatajax.com">privacidade@chatajax.com</a>
+                Email: <a href="mailto:privacidade@ajax.dev.br">privacidade@ajax.dev.br</a>
               </p>
             </div>
           </div>

@@ -21,10 +21,10 @@ export default function SobrePage() {
               Sobre
             </span>
             <h1 className="text-[clamp(1.8rem,4vw,2.8rem)] font-[800] text-ajax-black mb-4 uppercase tracking-[.02em]">
-              Sobre o <span className="serif-i">Chat Ajax</span>
+              Sobre a <span className="serif-i">Ajax Hub</span>
             </h1>
             <p className="text-ajax-black/70 text-lg leading-[1.7]">
-              Plataforma de atendimento multicanal com IA, criada para o mercado brasileiro. Centralize todos os seus canais, automatize com inteligencia e venda mais.
+              A Ajax Hub e a empresa por tras do Chat Ajax — plataforma de atendimento multicanal com IA, criada para o mercado brasileiro.
             </p>
           </div>
         </Container>
@@ -60,7 +60,7 @@ export default function SobrePage() {
                   'Tecnologia open source robusta, usada por 20.000+ empresas no mundo',
                   'Servidores no Brasil — LGPD compliant',
                   'Suporte humano em portugues',
-                  'Captain AI — IA que entende contexto e responde com precisao',
+                  'IA integrada que entende contexto e responde com precisao',
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3 text-ajax-black/70">
                     <span className="w-[18px] h-[18px] bg-[#5E17EB] flex items-center justify-center shrink-0 mt-0.5">

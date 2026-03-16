@@ -5,9 +5,7 @@ const systems = [
   { name: 'API de Integracao', status: 'operational' as const },
   { name: 'WhatsApp (API Oficial)', status: 'operational' as const },
   { name: 'Instagram / Facebook', status: 'operational' as const },
-  { name: 'Captain AI', status: 'operational' as const },
   { name: 'Email (SMTP/IMAP)', status: 'operational' as const },
-  { name: 'Widget Live Chat', status: 'operational' as const },
   { name: 'Webhooks & Automacoes', status: 'operational' as const },
 ]
 
@@ -26,8 +24,8 @@ const recentEvents = [
   },
   {
     date: '28 Fev 2026',
-    title: 'Melhoria de desempenho no Captain AI',
-    description: 'Otimizacao no tempo de resposta da IA. Latencia reduzida em 40%.',
+    title: 'Melhoria de desempenho na plataforma',
+    description: 'Otimizacao no tempo de resposta geral. Latencia reduzida em 40%.',
     type: 'improvement' as const,
   },
   {
