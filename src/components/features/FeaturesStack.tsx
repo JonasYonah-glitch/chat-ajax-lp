@@ -165,7 +165,7 @@ function FeatureCard({ feature }: { feature: typeof features[0] }) {
         <span className="inline-block text-[10px] font-extrabold uppercase tracking-[0.2em] text-ajax-purple mb-4">
           {feature.tag}
         </span>
-        <h2 className="text-3xl lg:text-4xl font-extrabold text-ajax-black leading-tight mb-4">
+        <h2 className="text-[1.65rem] sm:text-3xl lg:text-4xl font-extrabold text-ajax-black leading-[1.15] mb-4 tracking-[-0.02em]">
           {feature.headline}
         </h2>
         <p className="text-base text-ajax-black/60 leading-relaxed mb-6">

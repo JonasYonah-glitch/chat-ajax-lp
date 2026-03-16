@@ -148,15 +148,16 @@ export function PlatformShowcase() {
     <section ref={sectionRef} className="py-24 max-md:py-14 bg-white relative overflow-hidden">
       <Container>
         {/* Header */}
-        <div className="text-center mb-14 max-md:mb-10 max-w-5xl mx-auto">
+        <div className="text-center mb-14 max-md:mb-10 max-w-4xl mx-auto">
           <SectionTag>Plataforma</SectionTag>
           <SectionTitle
             title={
               <>
-                Nao importa o tipo de negocio.{' '}
-                <span className="text-[#5E17EB]">Se voce vende pelo WhatsApp</span>, o Chat Ajax trabalha por voce
+                Se voce vende pelo WhatsApp,{' '}
+                <span className="text-[#5E17EB]">o Chat Ajax trabalha por voce</span>
               </>
             }
+            subtitle="Nao importa o tipo de negocio. Escolha seu segmento e veja como funciona."
           />
         </div>
 

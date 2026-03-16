@@ -457,7 +457,7 @@ export function StepsSection() {
         <div className="max-w-4xl mx-auto">
           {/* Header */}
           <div className="text-center mb-10 max-md:mb-6">
-            <h2 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-extrabold tracking-[-0.02em] leading-[1.1] text-ajax-black uppercase">
+            <h2 className="text-[1.65rem] sm:text-3xl lg:text-4xl font-extrabold tracking-[-0.02em] leading-[1.15] text-ajax-black uppercase">
               3 passos pra{' '}
               <span className="text-ajax-purple">comecar hoje</span>
             </h2>

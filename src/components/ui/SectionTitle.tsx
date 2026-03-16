@@ -8,7 +8,7 @@ interface SectionTitleProps {
 export function SectionTitle({ title, subtitle, center = true, className = '' }: SectionTitleProps) {
   return (
     <div className={`${center ? 'text-center' : ''} ${className}`}>
-      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-[-0.02em] leading-[1.1] mb-3 text-[#131313] uppercase">
+      <h2 className="text-[1.65rem] sm:text-3xl lg:text-4xl font-extrabold tracking-[-0.02em] leading-[1.15] mb-3 text-[#131313] uppercase max-w-[720px] mx-auto">
         {title}
       </h2>
 

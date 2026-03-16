@@ -29,7 +29,7 @@ export function CertificationsSection() {
 
       <Container>
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-center text-3xl lg:text-4xl font-extrabold text-ajax-black leading-tight mb-3">
+          <h2 className="text-center text-[1.65rem] sm:text-3xl lg:text-4xl font-extrabold text-ajax-black leading-[1.15] mb-3 uppercase tracking-[-0.02em]">
             Certificados pelas <span className="text-ajax-purple">maiores do mundo</span>
           </h2>
           <div className="w-12 h-[3px] bg-ajax-purple mx-auto mb-12" />
