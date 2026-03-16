@@ -363,10 +363,10 @@ export function StepsSection() {
 
     const ctx = gsap.context(() => {
       const totalCards = cards.length
-      const wrapperHeight = (totalCards - 1) * 200 + cardH + 120
+      const wrapperHeight = (totalCards - 1) * 350 + cardH + 200
 
       gsap.set(wrapperRef.current, { height: wrapperHeight })
-      gsap.set(gridRef.current, { position: 'sticky', top: 72, height: cardH })
+      gsap.set(gridRef.current, { position: 'sticky', top: 160, height: cardH })
 
       cards.forEach((card, i) => {
         gsap.set(card, { position: 'absolute', top: 0, left: 0, width: '100%', zIndex: i })
@@ -374,7 +374,7 @@ export function StepsSection() {
       })
 
       const tl = gsap.timeline({
-        scrollTrigger: { trigger: wrapperRef.current, start: 'top 72px', end: 'bottom bottom', scrub: 1 },
+        scrollTrigger: { trigger: wrapperRef.current, start: 'top 160px', end: 'bottom bottom', scrub: 1 },
       })
 
       tl.to({}, { duration: 0.25 })
