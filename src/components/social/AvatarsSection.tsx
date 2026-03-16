@@ -96,7 +96,7 @@ export function AvatarsSection() {
         },
       })
 
-      const scrollHeight = isMobile ? '180vh' : '250vh'
+      const scrollHeight = isMobile ? '300vh' : '250vh'
       wrapper.style.height = scrollHeight
 
       const tl = gsap.timeline({
