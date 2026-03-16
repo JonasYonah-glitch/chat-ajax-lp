@@ -351,101 +351,101 @@ export function StepsSection() {
     return () => ctx.revert()
   }, [isMobile])
 
-  /* ── Mobile: scroll-stacking ── */
+  /* ── Mobile: stagger entrance ── */
   useLayoutEffect(() => {
-    if (!isMobile || !wrapperRef.current || !gridRef.current) return
+    if (!isMobile || !sectionRef.current) return
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
-    const cards = gridRef.current.querySelectorAll<HTMLElement>('.step-card')
-    if (cards.length === 0) return
-
-    const cardH = cards[0].offsetHeight || 340
-
     const ctx = gsap.context(() => {
-      const totalCards = cards.length
-      const wrapperHeight = (totalCards - 1) * SCROLL_DISTANCE_MOBILE + cardH + 120
-
-      gsap.set(wrapperRef.current, { height: wrapperHeight })
-      gsap.set(gridRef.current, { position: 'sticky', top: 72, height: cardH })
-
+      const cards = sectionRef.current!.querySelectorAll('.step-card')
       cards.forEach((card, i) => {
-        gsap.set(card, {
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          zIndex: i,
-        })
-        if (i > 0) gsap.set(card, { opacity: 0, y: 40 })
+        gsap.fromTo(card,
+          { y: 30, opacity: 0 },
+          {
+            scrollTrigger: { trigger: card, start: 'top 90%', once: true },
+            y: 0, opacity: 1, duration: 0.5, ease: 'power2.out', delay: i * 0.1,
+          },
+        )
       })
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: wrapperRef.current,
-          start: 'top 72px',
-          end: 'bottom bottom',
-          scrub: 1,
-        },
-      })
-
-      tl.to({}, { duration: 0.25 })
-
-      for (let i = 0; i < totalCards - 1; i++) {
-        tl.to(cards[i], { scale: 0.93, y: -12, opacity: 0, duration: 0.5, ease: 'power1.inOut' }, `s-${i}`)
-        tl.to(cards[i + 1], { opacity: 1, y: 0, duration: 0.5, ease: 'power1.inOut' }, `s-${i}`)
-        if (i < totalCards - 2) tl.to({}, { duration: 0.25 })
-      }
-
-      tl.to({}, { duration: 0.25 })
     })
 
     return () => ctx.revert()
   }, [isMobile])
 
-  /* ── Render card ── */
-  const renderCard = (step: typeof steps[0], idx: number) => {
+  /* ── Render card (desktop) ── */
+  const renderCardDesktop = (step: typeof steps[0], idx: number) => {
     const SceneComp = sceneComponents[idx]
     return (
       <div
         key={step.digit}
         className="step-card group bg-white border-2 border-ajax-black/10 relative overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-[6px_6px_0_#5E17EB] hover:border-ajax-purple"
       >
-        {/* Large digit — top right corner */}
         <span
-          className="absolute -top-3 -right-1 font-black leading-none text-ajax-purple select-none pointer-events-none transition-opacity duration-300 text-[8rem] max-md:text-[7rem] opacity-[0.22] group-hover:opacity-[0.35]"
+          className="absolute -top-3 -right-1 font-black leading-none text-ajax-purple select-none pointer-events-none transition-opacity duration-300 text-[8rem] opacity-[0.22] group-hover:opacity-[0.35]"
           style={{ fontFamily: 'Sora, system-ui, sans-serif' }}
           aria-hidden="true"
         >
           {step.digit}
         </span>
 
-        {/* Corner triangle accent */}
         <div
           className="absolute top-0 right-0 w-0 h-0 z-[2] transition-opacity duration-300 opacity-0 group-hover:opacity-100"
-          style={{
-            borderStyle: 'solid',
-            borderWidth: '0 28px 28px 0',
-            borderColor: 'transparent #5E17EB transparent transparent',
-          }}
+          style={{ borderStyle: 'solid', borderWidth: '0 28px 28px 0', borderColor: 'transparent #5E17EB transparent transparent' }}
           aria-hidden="true"
         />
 
-        {/* Purple left accent */}
         <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-ajax-purple opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-        {/* Animated scene illustration */}
         <div className="relative z-[1] bg-ajax-surface/60 border-b-2 border-ajax-black/5">
           <SceneComp />
         </div>
 
-        {/* Text content */}
-        <div className="relative z-[1] p-6 max-md:p-5">
-          <h3 className="text-lg max-md:text-base font-extrabold text-ajax-black uppercase tracking-[-0.01em] mb-2">
+        <div className="relative z-[1] p-6">
+          <h3 className="text-lg font-extrabold text-ajax-black uppercase tracking-[-0.01em] mb-2">
             {step.title}
           </h3>
-          <p className="text-sm max-md:text-[13px] text-ajax-black/55 leading-[1.7]">
+          <p className="text-sm text-ajax-black/55 leading-[1.7]">
             {step.description}
           </p>
+        </div>
+      </div>
+    )
+  }
+
+  /* ── Render card (mobile) — horizontal layout ── */
+  const renderCardMobile = (step: typeof steps[0], idx: number) => {
+    const SceneComp = sceneComponents[idx]
+    return (
+      <div
+        key={step.digit}
+        className="step-card group bg-white border-2 border-ajax-black/10 relative overflow-hidden transition-all duration-300"
+      >
+        {/* Large digit — top right */}
+        <span
+          className="absolute -top-2 -right-1 font-black leading-none text-ajax-purple select-none pointer-events-none text-[5.5rem] opacity-[0.15]"
+          style={{ fontFamily: 'Sora, system-ui, sans-serif' }}
+          aria-hidden="true"
+        >
+          {step.digit}
+        </span>
+
+        <div className="relative z-[1] flex items-center gap-4 p-4">
+          {/* Scene — compact */}
+          <div className="shrink-0 w-[90px] h-[90px] bg-ajax-surface/60 border border-ajax-black/5 flex items-center justify-center overflow-hidden">
+            <div className="scale-[0.7] origin-center">
+              <SceneComp />
+            </div>
+          </div>
+
+          {/* Text */}
+          <div className="min-w-0 flex-1">
+            <h3 className="text-[15px] font-extrabold text-ajax-black uppercase tracking-[-0.01em] mb-1">
+              {step.title}
+            </h3>
+            <p className="text-[12px] text-ajax-black/55 leading-[1.6]">
+              {step.description}
+            </p>
+          </div>
         </div>
       </div>
     )
@@ -465,18 +465,17 @@ export function StepsSection() {
           </div>
 
           {isMobile ? (
-            <div ref={wrapperRef} className="relative">
-              <div ref={gridRef} className="relative">
-                {steps.map((step, idx) => renderCard(step, idx))}
-              </div>
+            /* Mobile: vertical list, compact horizontal cards */
+            <div className="flex flex-col gap-4">
+              {steps.map((step, idx) => renderCardMobile(step, idx))}
             </div>
           ) : (
+            /* Desktop: 3-col grid */
             <div className="relative grid grid-cols-3 gap-7">
-              {/* Dashed connector between cards */}
               <div className="absolute top-[60px] left-[calc(33.33%+14px)] right-[calc(33.33%+14px)] pointer-events-none z-0" aria-hidden="true">
                 <div className="step-connector h-[2px] w-full opacity-25" style={{ backgroundImage: 'repeating-linear-gradient(90deg, #5E17EB 0, #5E17EB 6px, transparent 6px, transparent 12px)' }} />
               </div>
-              {steps.map((step, idx) => renderCard(step, idx))}
+              {steps.map((step, idx) => renderCardDesktop(step, idx))}
             </div>
           )}
 

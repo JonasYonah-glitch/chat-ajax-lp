@@ -159,22 +159,22 @@ function FeatureCard({ feature }: { feature: typeof features[0] }) {
   }, [feature.video])
 
   return (
-    <div className="grid grid-cols-[1fr_auto] max-md:grid-cols-[1fr_120px] lg:grid-cols-2 gap-5 lg:gap-16 items-center">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-16 items-center">
       {/* Text */}
-      <div className="min-w-0">
-        <span className="inline-block text-[10px] font-extrabold uppercase tracking-[0.2em] text-ajax-purple mb-3 max-md:mb-2">
+      <div>
+        <span className="inline-block text-[10px] font-extrabold uppercase tracking-[0.2em] text-ajax-purple mb-3">
           {feature.tag}
         </span>
-        <h2 className="text-[1.3rem] sm:text-[1.65rem] lg:text-4xl font-extrabold text-ajax-black leading-[1.15] mb-3 max-md:mb-2 tracking-[-0.02em]">
+        <h2 className="text-[1.4rem] sm:text-[1.65rem] lg:text-4xl font-extrabold text-ajax-black leading-[1.15] mb-3 tracking-[-0.02em]">
           {feature.headline}
         </h2>
-        <p className="text-sm max-md:text-[13px] text-ajax-black/60 leading-relaxed mb-4 max-md:mb-3 max-md:line-clamp-3">
+        <p className="text-[13px] sm:text-sm text-ajax-black/60 leading-relaxed mb-4">
           {feature.description}
         </p>
-        <ul className="flex flex-col gap-2 max-md:gap-1.5">
+        <ul className="flex flex-col gap-2">
           {feature.bullets.map((b, i) => (
-            <li key={i} className="flex items-start gap-2 text-sm max-md:text-[12px] text-ajax-black/70">
-              <span className="w-4 h-4 max-md:w-3.5 max-md:h-3.5 mt-0.5 shrink-0 flex items-center justify-center bg-ajax-purple/10 text-ajax-purple">
+            <li key={i} className="flex items-start gap-2.5 text-[13px] sm:text-sm text-ajax-black/70">
+              <span className="w-[18px] h-[18px] mt-0.5 shrink-0 flex items-center justify-center bg-ajax-purple/10 text-ajax-purple">
                 <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6L5 9L10 3" stroke="currentColor" strokeWidth="2" strokeLinecap="square" /></svg>
               </span>
               {b}
@@ -183,11 +183,11 @@ function FeatureCard({ feature }: { feature: typeof features[0] }) {
         </ul>
       </div>
 
-      {/* Video 9:16 — smaller on mobile, side by side */}
+      {/* Video 9:16 — below text on mobile, right on desktop */}
       <div className="flex justify-center" ref={containerRef}>
         <div
-          className="relative overflow-hidden bg-ajax-black w-full max-w-[280px] max-md:max-w-[120px]"
-          style={{ aspectRatio: '9/16', borderRadius: 0 }}
+          className="relative overflow-hidden bg-ajax-black w-full max-w-[280px] max-md:max-w-[240px] border-2 border-ajax-black/10 shadow-[4px_4px_0_#5E17EB]"
+          style={{ aspectRatio: '9/16' }}
         >
           <video
             ref={videoRef}
@@ -197,9 +197,7 @@ function FeatureCard({ feature }: { feature: typeof features[0] }) {
             playsInline
             preload="none"
             className="w-full h-full object-cover pointer-events-none"
-            style={{ borderRadius: 0 }}
           />
-          <div className="absolute inset-0 border-2 border-ajax-black/10 pointer-events-none" />
         </div>
       </div>
     </div>

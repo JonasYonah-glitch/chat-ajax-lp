@@ -130,7 +130,7 @@ export function AvatarsSection() {
                 3 bilhoes de pessoas<br />estao nas<br />redes sociais
               </div>
               <div ref={phrase2Ref} className="font-serif italic text-[clamp(2rem,5vw,3.5rem)] font-bold text-[#131313] leading-[1.15] uppercase absolute inset-0 flex items-center justify-center opacity-0 translate-y-[30px] max-md:text-[2.1rem]">
-                <span>E seu negocio<br />precisa estar la!</span>
+                <span>O seu negocio<br />precisa<br />estar la!</span>
               </div>
             </div>
 
