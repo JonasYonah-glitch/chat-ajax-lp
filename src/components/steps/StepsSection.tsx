@@ -81,7 +81,7 @@ export function StepsSection() {
               <div className="step-connector h-[2px] w-full opacity-20" style={{ backgroundImage: 'repeating-linear-gradient(90deg, #5E17EB 0, #5E17EB 6px, transparent 6px, transparent 12px)' }} />
             </div>
 
-            {steps.map((step, i) => (
+            {steps.map((step) => (
               <div
                 key={step.number}
                 className="step-card bg-white border-2 border-ajax-black/10 p-6 text-center relative transition-all hover:-translate-y-0.5 hover:shadow-[4px_4px_0_#5E17EB] hover:border-ajax-purple"

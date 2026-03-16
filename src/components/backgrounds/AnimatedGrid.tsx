@@ -25,13 +25,13 @@ export function AnimatedGrid({ className = '', children }: AnimatedGridProps) {
         { opacity: 0.03 },
         {
           opacity: 0.08,
+          yoyo: true,
+          repeat: -1,
           scrollTrigger: {
             trigger: gridRef.current,
             start: 'top 80%',
             end: 'bottom 20%',
             scrub: 2,
-            yoyo: true,
-            repeat: -1,
           },
         },
       )
