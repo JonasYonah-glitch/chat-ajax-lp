@@ -16,6 +16,7 @@ const bottomRow = [
   { bubble: 'Quanto tempo pra chegar?', img: 'https://images.pexels.com/photos/3764119/pexels-photo-3764119.jpeg?auto=compress&cs=tinysrgb&w=200&h=200&fit=crop&crop=face', bubblePos: 'bottom' as const },
 ]
 
+
 function Person({ bubble, img, bubblePos, active }: { bubble: string; img: string; bubblePos: 'top' | 'bottom'; active?: boolean }) {
   const borderColor = active ? 'border-[#5E17EB]' : 'border-ajax-black/10'
   const shadowClass = active ? 'shadow-[2px_2px_0_#5E17EB]' : 'shadow-[2px_2px_0_rgba(19,19,19,.06)]'
@@ -25,7 +26,7 @@ function Person({ bubble, img, bubblePos, active }: { bubble: string; img: strin
       {/* Speech bubble above */}
       {bubblePos === 'top' && (
         <div className="relative mb-2">
-          <div className={`py-2 px-4 bg-white text-[.8rem] text-ajax-black whitespace-nowrap max-w-[220px] max-md:text-[.7rem] max-md:py-1.5 max-md:px-3 border-2 ${borderColor} ${shadowClass}`}>
+          <div className={`py-2 px-4 bg-white text-[.8rem] text-ajax-black whitespace-nowrap max-w-[220px] max-md:text-[.6rem] max-md:py-1 max-md:px-2 border-2 ${borderColor} ${shadowClass}`}>
             {bubble}
           </div>
           {/* Tail pointing down to avatar */}
@@ -42,7 +43,7 @@ function Person({ bubble, img, bubblePos, active }: { bubble: string; img: strin
       <div
         className={`is-rounded overflow-hidden border-2 ${
           active ? 'border-[#5E17EB] shadow-[2px_2px_0_#5E17EB]' : 'border-ajax-black/15'
-        } w-20 h-20 max-md:w-[60px] max-md:h-[60px]`}
+        } w-20 h-20 max-md:w-[46px] max-md:h-[46px]`}
         style={{ borderRadius: '9999px' }}
       >
         <img src={img} alt="" className="is-rounded w-full h-full object-cover" style={{ borderRadius: '9999px' }} loading="lazy" />
@@ -58,7 +59,7 @@ function Person({ bubble, img, bubblePos, active }: { bubble: string; img: strin
           <div className="absolute left-1/2 -translate-x-1/2 -top-[5px] w-0 h-0"
             style={{ borderLeft: '6px solid transparent', borderRight: '6px solid transparent', borderBottom: '6px solid white' }}
           />
-          <div className={`py-2 px-4 bg-white text-[.8rem] text-ajax-black whitespace-nowrap max-w-[220px] max-md:text-[.7rem] max-md:py-1.5 max-md:px-3 border-2 ${borderColor} ${shadowClass}`}>
+          <div className={`py-2 px-4 bg-white text-[.8rem] text-ajax-black whitespace-nowrap max-w-[220px] max-md:text-[.6rem] max-md:py-1 max-md:px-2 border-2 ${borderColor} ${shadowClass}`}>
             {bubble}
           </div>
         </div>
@@ -120,20 +121,20 @@ export function AvatarsSection() {
       <div ref={wrapperRef} className="relative">
         <div className="sticky top-0 min-h-screen flex flex-col items-center justify-center px-6 py-10">
           <Container>
-            <div className="flex justify-center gap-10 flex-wrap max-w-[1000px] mx-auto max-md:gap-4">
+            <div className="flex justify-center gap-10 flex-wrap max-w-[1000px] mx-auto max-md:gap-3">
               {topRow.map((p, i) => <Person key={i} {...p} />)}
             </div>
 
-            <div className="text-center my-12 mx-auto max-w-[800px] px-4 relative" style={{ minHeight: '8rem' }} id="avatarsText">
-              <div ref={phrase1Ref} className="font-serif italic text-[clamp(2rem,5vw,3.5rem)] font-bold text-[#131313] leading-[1.15] uppercase max-md:text-[1.5rem]">
+            <div className="text-center my-12 max-md:my-6 mx-auto max-w-[800px] px-4 relative" style={{ minHeight: '8rem' }} id="avatarsText">
+              <div ref={phrase1Ref} className="font-serif italic text-[clamp(2rem,5vw,3.5rem)] font-bold text-[#131313] leading-[1.15] uppercase max-md:text-[2rem]">
                 3 bilhoes de<br />pessoas estao nas<br />redes sociais
               </div>
-              <div ref={phrase2Ref} className="font-serif italic text-[clamp(2rem,5vw,3.5rem)] font-bold text-[#131313] leading-[1.15] uppercase absolute inset-0 flex items-center justify-center opacity-0 translate-y-[30px] max-md:text-[1.5rem]">
+              <div ref={phrase2Ref} className="font-serif italic text-[clamp(2rem,5vw,3.5rem)] font-bold text-[#131313] leading-[1.15] uppercase absolute inset-0 flex items-center justify-center opacity-0 translate-y-[30px] max-md:text-[2rem]">
                 <span>E seu negocio<br />precisa estar la!</span>
               </div>
             </div>
 
-            <div className="flex justify-center gap-10 flex-wrap max-w-[1000px] mx-auto max-md:gap-4">
+            <div className="flex justify-center gap-10 flex-wrap max-w-[1000px] mx-auto max-md:gap-3">
               {bottomRow.map((p, i) => <Person key={i} {...p} />)}
             </div>
           </Container>
