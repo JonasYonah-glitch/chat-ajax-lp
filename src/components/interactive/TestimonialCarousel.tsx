@@ -114,7 +114,7 @@ export function TestimonialCarousel() {
           <SectionTitle
             title={
               <>
-                Quem ja usa o <span className="text-[#5E17EB]">Chat Ajax</span>
+                Quem ja usa o<br className="md:hidden" /> <span className="text-[#5E17EB]">Chat Ajax</span>
               </>
             }
             subtitle="Empresas reais contando o que mudou."

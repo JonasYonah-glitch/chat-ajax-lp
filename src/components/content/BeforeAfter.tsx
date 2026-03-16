@@ -56,7 +56,7 @@ export function BeforeAfter() {
         <div className="max-w-4xl mx-auto">
           {/* Title */}
           <h2 className="text-center text-[1.65rem] sm:text-3xl lg:text-4xl font-extrabold text-ajax-black leading-[1.15] mb-3 uppercase tracking-[-0.02em]">
-            Antes e depois do{' '}
+            Antes e depois do<br className="md:hidden" />{' '}
             <span className="text-ajax-purple">Chat Ajax</span>
           </h2>
           <div className="w-12 h-[3px] bg-ajax-purple mx-auto mb-12" />
