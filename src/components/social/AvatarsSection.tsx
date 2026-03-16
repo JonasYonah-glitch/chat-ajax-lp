@@ -126,10 +126,10 @@ export function AvatarsSection() {
             </div>
 
             <div className="text-center my-12 max-md:my-6 mx-auto max-w-[800px] px-4 relative" style={{ minHeight: '8rem' }} id="avatarsText">
-              <div ref={phrase1Ref} className="font-serif italic text-[clamp(2rem,5vw,3.5rem)] font-bold text-[#131313] leading-[1.15] uppercase max-md:text-[2rem]">
-                3 bilhoes de<br />pessoas estao nas<br />redes sociais
+              <div ref={phrase1Ref} className="font-serif italic text-[clamp(2rem,5vw,3.5rem)] font-bold text-[#131313] leading-[1.15] uppercase max-md:text-[1.55rem]">
+                3 bilhoes de pessoas<br />estao nas<br />redes sociais
               </div>
-              <div ref={phrase2Ref} className="font-serif italic text-[clamp(2rem,5vw,3.5rem)] font-bold text-[#131313] leading-[1.15] uppercase absolute inset-0 flex items-center justify-center opacity-0 translate-y-[30px] max-md:text-[2rem]">
+              <div ref={phrase2Ref} className="font-serif italic text-[clamp(2rem,5vw,3.5rem)] font-bold text-[#131313] leading-[1.15] uppercase absolute inset-0 flex items-center justify-center opacity-0 translate-y-[30px] max-md:text-[1.55rem]">
                 <span>E seu negocio<br />precisa estar la!</span>
               </div>
             </div>
