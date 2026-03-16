@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat Ajax — Atendimento Multicanal com IA | WhatsApp, Instagram, TikTok em 1 Tela</title>
+    <meta name="description" content="Centralize WhatsApp, Instagram, TikTok, Email e mais em uma plataforma. IA que responde, vende e encanta seus clientes 24h." />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Chat Ajax — Atendimento Multicanal com IA" />
+    <meta property="og:description" content="Centralize WhatsApp, Instagram, TikTok, Email e mais em uma plataforma. IA que responde, vende e encanta seus clientes 24h." />
+    <meta property="og:image" content="https://chatajax.com.br/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Chat Ajax — Atendimento Multicanal com IA" />
+    <meta name="twitter:description" content="Centralize WhatsApp, Instagram, TikTok, Email e mais em uma plataforma." />
+    <meta name="theme-color" content="#131313" />
+    <link rel="icon" type="image/svg+xml" href="/Logos/ROXO.svg" />
+    <link rel="preload" href="/fonts/sora-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/sora-latin-ext.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preconnect" href="https://chatwoot.ajax.dev.br" crossorigin />
+    <link rel="preconnect" href="https://videos.pexels.com" crossorigin />
+    <link rel="dns-prefetch" href="https://api.iconify.design" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <script>
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          (function(d,t) {
+            var BASE_URL="https://chatwoot.ajax.dev.br";
+            var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src=BASE_URL+"/packs/js/sdk.js";
+            g.async=true;
+            s.parentNode.insertBefore(g,s);
+            g.onload=function(){
+              window.chatwootSDK.run({
+                websiteToken: 'ASFafFfpkZEpQG4AKJxUKinz',
+                baseUrl: BASE_URL
+              })
+            }
+          })(document,"script");
+        }, 3000);
+      });
+    </script>
+  </body>
+</html>
