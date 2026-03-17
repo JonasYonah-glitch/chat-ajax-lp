@@ -96,45 +96,24 @@ export function AvatarsSection() {
         },
       })
 
-      if (!isMobile) {
-        // Desktop: scroll-scrub driven swap
-        gsap.set(wrapper, { height: '250vh' })
+      // Scroll-scrub driven swap (desktop + mobile)
+      gsap.set(wrapper, { height: isMobile ? '200vh' : '250vh' })
 
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: wrapper,
-            start: 'top top',
-            end: 'bottom bottom',
-            scrub: 0.5,
-          },
-        })
-        tl.to({}, { duration: 0.4 })
-        tl.to(p1, { opacity: 0, y: -30, duration: 0.3, ease: 'none' })
-        tl.to(p2, { opacity: 1, y: 0, duration: 0.3, ease: 'none' }, '<0.1')
-        tl.to({}, { duration: 0.4 })
-      }
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: wrapper,
+          start: 'top top',
+          end: 'bottom bottom',
+          scrub: 0.5,
+        },
+      })
+      tl.to({}, { duration: 0.4 })
+      tl.to(p1, { opacity: 0, y: -30, duration: 0.3, ease: 'none' })
+      tl.to(p2, { opacity: 1, y: 0, duration: 0.3, ease: 'none' }, '<0.1')
+      tl.to({}, { duration: 0.4 })
     })
 
-    // Mobile: IntersectionObserver for text swap (outside gsap.context)
-    let observer: IntersectionObserver | null = null
-    if (isMobile && p1 && p2) {
-      observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            observer?.disconnect()
-            gsap.delayedCall(1.8, () => {
-              gsap.to(p1, { opacity: 0, y: -20, duration: 0.6, ease: 'power2.inOut' })
-              gsap.to(p2, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out', delay: 0.3 })
-            })
-          }
-        },
-        { threshold: 0.5 },
-      )
-      observer.observe(p1)
-    }
-
     return () => {
-      observer?.disconnect()
       ctx.revert()
     }
   }, [isMobile])
@@ -142,7 +121,7 @@ export function AvatarsSection() {
   return (
     <section ref={sectionRef} className="bg-white relative" id="avatarsSection">
       <div ref={wrapperRef} className="relative">
-        <div className="sticky top-0 min-h-screen max-lg:static max-lg:min-h-0 max-lg:py-14 px-6 py-10 flex flex-col items-center justify-center">
+        <div className="sticky top-0 min-h-screen max-md:min-h-0 max-md:pt-20 max-md:pb-10 px-6 py-10 flex flex-col items-center justify-center max-md:justify-start">
           <Container>
             <div className="flex justify-center gap-10 flex-wrap max-w-[1000px] mx-auto max-md:gap-3">
               {topRow.map((p, i) => <Person key={i} {...p} />)}
