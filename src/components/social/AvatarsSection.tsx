@@ -96,12 +96,9 @@ export function AvatarsSection() {
         },
       })
 
-      if (isMobile) {
-        // Mobile: IntersectionObserver — immune to Lenis scroll conflicts
-        wrapper.style.height = 'auto'
-      } else {
+      if (!isMobile) {
         // Desktop: scroll-scrub driven swap
-        wrapper.style.height = '250vh'
+        gsap.set(wrapper, { height: '250vh' })
 
         const tl = gsap.timeline({
           scrollTrigger: {
@@ -145,7 +142,7 @@ export function AvatarsSection() {
   return (
     <section ref={sectionRef} className="bg-white relative" id="avatarsSection">
       <div ref={wrapperRef} className="relative">
-        <div className={`${isMobile ? 'py-14 px-6' : 'sticky top-0 min-h-screen px-6 py-10'} flex flex-col items-center justify-center`}>
+        <div className="sticky top-0 min-h-screen max-lg:static max-lg:min-h-0 max-lg:py-14 px-6 py-10 flex flex-col items-center justify-center">
           <Container>
             <div className="flex justify-center gap-10 flex-wrap max-w-[1000px] mx-auto max-md:gap-3">
               {topRow.map((p, i) => <Person key={i} {...p} />)}
