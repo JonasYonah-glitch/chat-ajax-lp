@@ -99,24 +99,6 @@ export function AvatarsSection() {
       if (isMobile) {
         // Mobile: IntersectionObserver — immune to Lenis scroll conflicts
         wrapper.style.height = 'auto'
-
-        const observer = new IntersectionObserver(
-          ([entry]) => {
-            if (entry.isIntersecting) {
-              observer.disconnect()
-              gsap.delayedCall(1.8, () => {
-                gsap.to(p1, { opacity: 0, y: -20, duration: 0.6, ease: 'power2.inOut' })
-                gsap.to(p2, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out', delay: 0.3 })
-              })
-            }
-          },
-          { threshold: 0.5 },
-        )
-        observer.observe(p1)
-
-        // Cleanup observer on unmount
-        const origRevert = ctx.revert.bind(ctx)
-        ctx.revert = () => { observer.disconnect(); origRevert() }
       } else {
         // Desktop: scroll-scrub driven swap
         wrapper.style.height = '250vh'
@@ -136,7 +118,28 @@ export function AvatarsSection() {
       }
     })
 
-    return () => ctx.revert()
+    // Mobile: IntersectionObserver for text swap (outside gsap.context)
+    let observer: IntersectionObserver | null = null
+    if (isMobile && p1 && p2) {
+      observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            observer?.disconnect()
+            gsap.delayedCall(1.8, () => {
+              gsap.to(p1, { opacity: 0, y: -20, duration: 0.6, ease: 'power2.inOut' })
+              gsap.to(p2, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out', delay: 0.3 })
+            })
+          }
+        },
+        { threshold: 0.5 },
+      )
+      observer.observe(p1)
+    }
+
+    return () => {
+      observer?.disconnect()
+      ctx.revert()
+    }
   }, [isMobile])
 
   return (
