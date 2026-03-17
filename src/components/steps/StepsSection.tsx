@@ -495,7 +495,7 @@ export function StepsSection() {
             <>
             <div className="text-center mb-10">
               <h2 className="text-3xl lg:text-4xl font-extrabold tracking-[-0.02em] leading-[1.15] text-ajax-black uppercase">
-                3 passos pra<br />
+                3 passos pra{' '}
                 <span className="text-ajax-purple">comecar hoje</span>
               </h2>
               <div className="w-16 h-[3px] bg-ajax-purple mx-auto mt-3" aria-hidden="true" />
