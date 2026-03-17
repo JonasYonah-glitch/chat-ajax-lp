@@ -40,7 +40,7 @@ export function ReportDemo() {
 
       {bars.map((bar, i) => (
         <div key={i} className="flex items-center gap-3 mb-3">
-          <div className="text-[.72rem] text-ajax-black/40 w-[90px] text-right shrink-0 font-semibold tracking-[.04em] uppercase">
+          <div className="text-[.72rem] text-ajax-black/60 w-[90px] text-right shrink-0 font-semibold tracking-[.04em] uppercase">
             {bar.label}
           </div>
           {/* Bar track — hard edge, no rounded tops */}
@@ -62,11 +62,11 @@ export function ReportDemo() {
       <div className="grid grid-cols-2 gap-2.5 mt-5">
         <div className="text-center py-4 px-3 bg-[rgba(0,0,0,.03)] border-2 border-[#131313]/10">
           <div className="text-[1.4rem] font-[900] leading-[1.2] text-[#5E17EB]">1.247</div>
-          <div className="text-[.62rem] text-ajax-black/50 mt-1 uppercase tracking-[.08em] font-bold">Conversas/semana</div>
+          <div className="text-[.62rem] text-ajax-black/60 mt-1 uppercase tracking-[.08em] font-bold">Conversas/semana</div>
         </div>
         <div className="text-center py-4 px-3 bg-[rgba(0,0,0,.03)] border-2 border-[#131313]/10">
           <div className="text-[1.4rem] font-[900] leading-[1.2] text-[#5E17EB]">48s</div>
-          <div className="text-[.62rem] text-ajax-black/50 mt-1 uppercase tracking-[.08em] font-bold">Tempo medio</div>
+          <div className="text-[.62rem] text-ajax-black/60 mt-1 uppercase tracking-[.08em] font-bold">Tempo medio</div>
         </div>
       </div>
     </div>

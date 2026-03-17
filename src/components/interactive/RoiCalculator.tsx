@@ -119,10 +119,10 @@ export function RoiCalculator() {
                     className="w-full roi-slider"
                   />
                   <div className="flex justify-between mt-1">
-                    <span className="text-[.72rem] text-ajax-black/50 uppercase tracking-[.04em]">
+                    <span className="text-[.72rem] text-ajax-black/60 uppercase tracking-[.04em]">
                       {slider.prefix ? `${slider.prefix} ${formatBRL(slider.min)}` : slider.suffix ? `${formatBRL(slider.min)}${slider.suffix}` : formatBRL(slider.min)}
                     </span>
-                    <span className="text-[.72rem] text-ajax-black/50 uppercase tracking-[.04em]">
+                    <span className="text-[.72rem] text-ajax-black/60 uppercase tracking-[.04em]">
                       {slider.prefix ? `${slider.prefix} ${formatBRL(slider.max)}` : slider.suffix ? `${formatBRL(slider.max)}${slider.suffix}` : formatBRL(slider.max)}
                     </span>
                   </div>
@@ -161,7 +161,7 @@ export function RoiCalculator() {
             {/* Investimento */}
             <div className="flex items-center justify-between py-3 border-b border-[rgba(0,0,0,.06)]">
               <span className="text-[.88rem] text-ajax-black/70 uppercase tracking-[.04em]">
-                Custo do plano <span className="text-ajax-black/50 text-[.78rem] normal-case">({results.plano})</span>
+                Custo do plano <span className="text-ajax-black/60 text-[.78rem] normal-case">({results.plano})</span>
               </span>
               <span className="text-[1rem] font-bold text-ajax-black tabular-nums">
                 - R$ {formatBRL(results.invest)}
@@ -170,7 +170,7 @@ export function RoiCalculator() {
 
             {/* Ganho liquido — large purple number */}
             <div className="mt-6 mb-5">
-              <span className="text-[.78rem] text-ajax-black/50 uppercase tracking-[.08em] font-bold block mb-1">
+              <span className="text-[.78rem] text-ajax-black/60 uppercase tracking-[.08em] font-bold block mb-1">
                 O que voce ganha a mais por mes
               </span>
               <span

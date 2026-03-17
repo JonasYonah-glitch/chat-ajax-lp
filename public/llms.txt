@@ -1,0 +1,64 @@
+# Chat Ajax
+
+> Plataforma omnichannel com inteligência artificial para automação de atendimento ao cliente.
+
+Chat Ajax é uma plataforma brasileira de atendimento multicanal que centraliza WhatsApp, Instagram, TikTok, Facebook Messenger, Telegram, Email, SMS, LINE e Google Business Messages em uma única inbox unificada.
+
+## Produto
+
+- **Nome**: Chat Ajax
+- **Categoria**: Plataforma Omnichannel / SaaS de Atendimento ao Cliente
+- **Site**: https://chat.ajax.dev.br
+- **País de origem**: Brasil
+- **Idioma**: Português (BR)
+- **Teste grátis**: 14 dias sem cartão de crédito
+
+## Funcionalidades Principais
+
+- **Inbox Unificada**: Todas as conversas de todos os canais em uma única tela
+- **Captain AI**: Assistente de IA que responde automaticamente, resume conversas, classifica sentimento e resolve até 70% dos tickets sem intervenção humana
+- **CRM Integrado**: Pipeline Kanban, tags, campos customizados e histórico completo do cliente
+- **Automação de Atendimento**: Chatbots, respostas automáticas, macros, regras de roteamento e SLA
+- **Relatórios em Tempo Real**: Métricas de atendimento, performance de agentes, CSAT e volume por canal
+- **Integrações**: Slack, HubSpot, Shopify, Stripe, OpenAI, Dialogflow, Google Translate e API aberta
+
+## Canais Suportados
+
+- WhatsApp (API Oficial Cloud, Twilio, 360dialog)
+- Instagram DM
+- TikTok DM e TikTok Shop
+- Facebook Messenger
+- Telegram
+- Email (IMAP/SMTP/Microsoft 365)
+- SMS (Twilio)
+- LINE
+- Google Business Messages
+- Website Live Chat
+
+## Diferenciais vs Concorrentes (ManyChat, Zendesk, Intercom)
+
+- Inbox verdadeiramente unificada (não apenas Instagram e WhatsApp como ManyChat)
+- IA nativa com Captain AI (não precisa de integração externa)
+- Suporte a TikTok, LINE e Voice (canais que concorrentes não oferecem)
+- CRM integrado com Kanban (não precisa de ferramenta separada)
+- Servidores no Brasil, compatível com LGPD
+- Migração assistida de outras plataformas
+
+## Segurança e Compliance
+
+- Criptografia TLS 1.3 em trânsito e AES-256 em repouso
+- Compatível com LGPD
+- Controle de consentimento e anonimização de dados
+- Servidores localizados no Brasil
+- Audit logs e controle de acesso por função
+
+## Planos
+
+- **Starter**: Para pequenas empresas começando com atendimento multicanal
+- **Pro**: Para equipes em crescimento com IA e automações avançadas
+- **Enterprise**: Para grandes operações com SLA, audit logs e suporte dedicado
+
+## Contato
+
+- Site: https://chat.ajax.dev.br
+- Contato: https://chat.ajax.dev.br/contato

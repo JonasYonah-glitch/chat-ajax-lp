@@ -21,7 +21,7 @@ export default function ContatoPage() {
     setSent(true)
   }
 
-  const inputClass = 'w-full bg-[#F0F0F5] border-2 border-[rgba(0,0,0,.08)] px-4 py-3.5 text-ajax-black text-[.9rem] outline-none transition-all duration-200 focus:border-[#5E17EB] focus:bg-white focus:shadow-[2px_2px_0_rgba(94,23,235,.15)] placeholder:text-ajax-black/40'
+  const inputClass = 'w-full bg-[#F0F0F5] border-2 border-[rgba(0,0,0,.08)] px-4 py-3.5 text-ajax-black text-[.9rem] outline-none transition-all duration-200 focus:border-[#5E17EB] focus:bg-white focus:shadow-[2px_2px_0_rgba(94,23,235,.15)] placeholder:text-ajax-black/60'
 
   return (
     <>
@@ -82,7 +82,7 @@ export default function ContatoPage() {
                       content: (
                         <>
                           <div className="text-ajax-black/70 text-[.85rem]">Seg a Sex, 9h as 18h (BRT)</div>
-                          <div className="text-ajax-black/50 text-[.78rem] mt-0.5">Suporte via chat: 24/7</div>
+                          <div className="text-ajax-black/60 text-[.78rem] mt-0.5">Suporte via chat: 24/7</div>
                         </>
                       ),
                     },

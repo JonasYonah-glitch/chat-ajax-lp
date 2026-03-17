@@ -79,7 +79,7 @@ export default function StatusPage() {
                 <span className={`font-[800] text-[1rem] uppercase tracking-[.04em] ${allOperational ? 'text-[#059669]' : 'text-[#D97706]'}`}>
                   {allOperational ? 'Todos os sistemas operacionais' : 'Alguns sistemas com problemas'}
                 </span>
-                <p className="text-ajax-black/50 text-[.8rem] mt-0.5">Atualizado em tempo real</p>
+                <p className="text-ajax-black/60 text-[.8rem] mt-0.5">Atualizado em tempo real</p>
               </div>
             </div>
 
@@ -126,7 +126,7 @@ export default function StatusPage() {
                     }}
                   />
                   <div className="text-[1.8rem] font-[800]" style={{ color: stat.color }}>{stat.value}</div>
-                  <div className="text-ajax-black/50 text-[.8rem] mt-1 uppercase tracking-[.04em] font-semibold">{stat.label}</div>
+                  <div className="text-ajax-black/60 text-[.8rem] mt-1 uppercase tracking-[.04em] font-semibold">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -150,7 +150,7 @@ export default function StatusPage() {
                       >
                         {cfg.label}
                       </span>
-                      <span className="text-ajax-black/50 text-[.78rem] uppercase tracking-[.04em]">{event.date}</span>
+                      <span className="text-ajax-black/60 text-[.78rem] uppercase tracking-[.04em]">{event.date}</span>
                     </div>
                     <h3 className="text-ajax-black font-bold text-[.95rem] mb-1 uppercase tracking-[.02em]">{event.title}</h3>
                     <p className="text-ajax-black/70 text-[.85rem] leading-[1.6]">{event.description}</p>

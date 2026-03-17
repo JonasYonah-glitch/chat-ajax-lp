@@ -13,7 +13,7 @@ function fmtCard(v: string) { return v.replace(/\D/g, '').replace(/(\d{4})/g, '$
 function fmtExp(v: string) { const d = v.replace(/\D/g, '').slice(0, 4); return d.length >= 3 ? d.slice(0, 2) + '/' + d.slice(2) : d }
 
 /* ── Shared styles — hard-edge ── */
-const field = 'w-full bg-white border-2 border-ajax-black/10 px-4 py-3 text-[#131313] text-[.9rem] outline-none transition-all duration-200 focus:border-[#5E17EB] focus:shadow-[2px_2px_0_rgba(94,23,235,.15)] placeholder:text-ajax-black/40'
+const field = 'w-full bg-white border-2 border-ajax-black/10 px-4 py-3 text-[#131313] text-[.9rem] outline-none transition-all duration-200 focus:border-[#5E17EB] focus:shadow-[2px_2px_0_rgba(94,23,235,.15)] placeholder:text-ajax-black/60'
 const label = 'text-[.72rem] text-ajax-black/60 font-bold mb-1.5 block uppercase tracking-[.06em]'
 const btn = 'w-full py-[14px] bg-[#5E17EB] text-white font-bold text-[.95rem] cursor-pointer border-none transition-all duration-200 hover:bg-[#4A11C0] hover:shadow-[4px_4px_0_rgba(94,23,235,.3)] active:translate-y-px disabled:opacity-50 disabled:cursor-not-allowed uppercase tracking-[.04em]'
 
@@ -33,6 +33,8 @@ function StepCustomer() {
     if (d.length !== 11 && d.length !== 14) e.cpf = 'CPF ou CNPJ invalido'
     if (Object.keys(e).length) { setErr(e); return }
     setCustomerData({ name: name.trim(), email: email.trim(), cpfCnpj: cpf.replace(/\D/g, '') })
+    trackFbEvent('Lead', { content_name: 'Checkout - Dados do cliente' })
+    trackGaEvent('generate_lead', { currency: 'BRL' })
     setStep('payment')
   }
 
@@ -60,7 +62,7 @@ function StepCustomer() {
         Continuar
       </button>
 
-      <div className="flex items-center justify-center gap-4 mt-5 text-[.7rem] text-ajax-black/40">
+      <div className="flex items-center justify-center gap-4 mt-5 text-[.7rem] text-ajax-black/60">
         <span className="flex items-center gap-1">
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1.5L2 3V5.5C2 8 3.8 10 6 11C8.2 10 10 8 10 5.5V3L6 1.5Z" stroke="currentColor" strokeWidth=".9" fill="rgba(94,23,235,.06)"/><path d="M4.2 6L5.4 7.2L7.8 4.8" stroke="currentColor" strokeWidth=".9" strokeLinecap="round" strokeLinejoin="round"/></svg>
           Pagamento seguro
@@ -159,7 +161,7 @@ function StepPayment() {
                     </span>
                   )}
                 </div>
-                <span className="text-[.75rem] text-ajax-black/40">{m.sub}</span>
+                <span className="text-[.75rem] text-ajax-black/60">{m.sub}</span>
               </div>
             </button>
           )
@@ -168,7 +170,7 @@ function StepPayment() {
 
       {method === 'CREDIT_CARD' && (
         <div className="space-y-3 mb-5 p-4 bg-ajax-surface border-2 border-ajax-black/10">
-          <p className="text-[.7rem] text-ajax-black/40 flex items-center gap-1.5 mb-1">
+          <p className="text-[.7rem] text-ajax-black/60 flex items-center gap-1.5 mb-1">
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="2.5" y="5" width="7" height="5" rx="1" stroke="#5e17eb" strokeWidth=".9"/><path d="M4 5V3.5a2 2 0 014 0V5" stroke="#5e17eb" strokeWidth=".9" strokeLinecap="round"/></svg>
             Dados protegidos e criptografados
           </p>
@@ -239,6 +241,24 @@ function StepConfirmation() {
   const r = state.result
   const [copied, setCopied] = useState(false)
 
+  // Track Purchase on confirmation (card = immediate, PIX/boleto = pending but intent counted)
+  useEffect(() => {
+    if (r && state.plan) {
+      trackFbEvent('Purchase', {
+        content_name: `Plano ${state.plan.name}`,
+        currency: 'BRL',
+        value: state.plan.numericValue,
+      })
+      trackGaEvent('purchase', {
+        transaction_id: r.paymentId,
+        currency: 'BRL',
+        value: state.plan.numericValue,
+        items: [{ item_name: `Plano ${state.plan.name}`, price: state.plan.numericValue }],
+      })
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   if (!r) return null
 
   function copyPix() {
@@ -273,7 +293,7 @@ function StepConfirmation() {
       {isPix && r.pix && (
         <div className="mb-5">
           <div className="bg-white p-4 inline-block mb-4 border-2 border-ajax-black/10">
-            <img src={`data:image/png;base64,${r.pix.encodedImage}`} alt="QR Code PIX" className="w-[180px] h-[180px]" />
+            <img src={`data:image/png;base64,${r.pix.encodedImage}`} alt="QR Code PIX" width={180} height={180} className="w-[180px] h-[180px]" />
           </div>
 
           <div className="relative max-w-[320px] mx-auto">
@@ -289,7 +309,7 @@ function StepConfirmation() {
           </div>
 
           {r.pix.expirationDate && (
-            <p className="text-[.7rem] text-ajax-black/40 mt-2">Valido ate {new Date(r.pix.expirationDate).toLocaleString('pt-BR')}</p>
+            <p className="text-[.7rem] text-ajax-black/60 mt-2">Valido ate {new Date(r.pix.expirationDate).toLocaleString('pt-BR')}</p>
           )}
         </div>
       )}
@@ -342,13 +362,13 @@ function Steps({ current }: { current: 'customer' | 'payment' | 'confirmation' }
           <div className="flex items-center gap-1.5">
             {/* Numbered square — active = purple fill */}
             <div className={`w-6 h-6 flex items-center justify-center text-[.65rem] font-bold transition-all duration-300 ${
-              i < idx ? 'bg-[#5E17EB] text-white' : i === idx ? 'bg-[#5E17EB] text-white shadow-[2px_2px_0_rgba(94,23,235,.3)]' : 'bg-ajax-surface text-ajax-black/40 border border-ajax-black/10'
+              i < idx ? 'bg-[#5E17EB] text-white' : i === idx ? 'bg-[#5E17EB] text-white shadow-[2px_2px_0_rgba(94,23,235,.3)]' : 'bg-ajax-surface text-ajax-black/60 border border-ajax-black/10'
             }`}>
               {i < idx ? (
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 6.5L5 8.5L9 4" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
               ) : i + 1}
             </div>
-            <span className={`text-[.72rem] font-medium whitespace-nowrap uppercase tracking-[.04em] ${i === idx ? 'text-ajax-black' : i < idx ? 'text-ajax-black/60' : 'text-ajax-black/40'}`}>{names[i]}</span>
+            <span className={`text-[.72rem] font-medium whitespace-nowrap uppercase tracking-[.04em] ${i === idx ? 'text-ajax-black' : i < idx ? 'text-ajax-black/60' : 'text-ajax-black/60'}`}>{names[i]}</span>
           </div>
           {i < all.length - 1 && (
             <div className={`flex-1 h-px mx-3 transition-colors duration-300 ${i < idx ? 'bg-[#5E17EB]' : 'bg-ajax-black/10'}`} />
@@ -359,10 +379,35 @@ function Steps({ current }: { current: 'customer' | 'payment' | 'confirmation' }
   )
 }
 
+/* ── Tracking helpers ── */
+declare global { interface Window { fbq?: (...args: unknown[]) => void; gtag?: (...args: unknown[]) => void } }
+function trackFbEvent(event: string, data?: Record<string, unknown>) {
+  if (typeof window !== 'undefined' && window.fbq) window.fbq('track', event, data)
+}
+function trackGaEvent(event: string, data?: Record<string, unknown>) {
+  if (typeof window !== 'undefined' && window.gtag) window.gtag('event', event, data)
+}
+
 /* ── Modal ── */
 export function CheckoutModal() {
   const { state, closeCheckout } = useCheckout()
   const overlayRef = useRef<HTMLDivElement>(null)
+
+  // Track InitiateCheckout when modal opens
+  useEffect(() => {
+    if (state.isOpen && state.plan) {
+      trackFbEvent('InitiateCheckout', {
+        content_name: `Plano ${state.plan.name}`,
+        currency: 'BRL',
+        value: state.plan.numericValue,
+      })
+      trackGaEvent('begin_checkout', {
+        currency: 'BRL',
+        value: state.plan.numericValue,
+        items: [{ item_name: `Plano ${state.plan.name}`, price: state.plan.numericValue }],
+      })
+    }
+  }, [state.isOpen, state.plan])
 
   useEffect(() => {
     if (state.isOpen) document.body.style.overflow = 'hidden'
@@ -398,7 +443,7 @@ export function CheckoutModal() {
           {/* Close button — square */}
           <button
             onClick={closeCheckout}
-            className="absolute top-3 right-3 w-8 h-8 flex items-center justify-center text-ajax-black/40 hover:text-ajax-black hover:bg-ajax-surface cursor-pointer bg-transparent border-none transition-colors z-10"
+            className="absolute top-3 right-3 w-8 h-8 flex items-center justify-center text-ajax-black/60 hover:text-ajax-black hover:bg-ajax-surface cursor-pointer bg-transparent border-none transition-colors z-10"
             aria-label="Fechar"
           >
             <SolarIcon icon="solar:close-circle-linear" size={18} />
@@ -414,7 +459,7 @@ export function CheckoutModal() {
                 <div className="min-w-0">
                   <p className="text-[.9rem] font-bold text-[#131313] leading-tight uppercase tracking-[.03em]">Plano {state.plan.name}</p>
                   <p className="text-[.82rem] text-[#5E17EB] font-semibold">
-                    {state.plan.price}<span className="text-ajax-black/40 font-normal">{state.plan.cycle === 'YEARLY' ? '/mes (anual)' : '/mes'}</span>
+                    {state.plan.price}<span className="text-ajax-black/60 font-normal">{state.plan.cycle === 'YEARLY' ? '/mes (anual)' : '/mes'}</span>
                   </p>
                 </div>
               </div>

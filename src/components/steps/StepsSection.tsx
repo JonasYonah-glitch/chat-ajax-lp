@@ -164,7 +164,7 @@ function SceneResults() {
             <span className="scene3-counter text-[1.6rem] max-md:text-[1.3rem] font-black text-ajax-purple leading-none">0</span>
             <span className="text-[0.7rem] font-bold text-ajax-purple">%</span>
           </div>
-          <div className="text-[7px] max-md:text-[6px] font-bold text-ajax-black/50 uppercase tracking-wider">Mais vendas</div>
+          <div className="text-[7px] max-md:text-[6px] font-bold text-ajax-black/60 uppercase tracking-wider">Mais vendas</div>
           {/* Arrow up */}
           <div className="scene3-arrow flex items-center gap-1 mt-1.5 opacity-0">
             <svg width="10" height="10" viewBox="0 0 10 10" fill="none">

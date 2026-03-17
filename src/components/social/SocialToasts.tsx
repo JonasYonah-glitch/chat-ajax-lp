@@ -41,7 +41,7 @@ export function SocialToasts() {
   }, [removeToast])
 
   const scheduleNext = useCallback(() => {
-    const delay = randBetween(6000, 14000)
+    const delay = randBetween(18000, 35000)
     timeoutRef.current = setTimeout(() => {
       const id = Date.now()
       const data = toastData[indexRef.current % toastData.length]
@@ -50,8 +50,8 @@ export function SocialToasts() {
 
       setToasts(prev => [...prev, { id, data, exit: '', timeLabel }])
 
-      // Auto-dismiss after random 4-7 seconds
-      const displayTime = randBetween(4000, 7000)
+      // Auto-dismiss quickly
+      const displayTime = randBetween(2500, 4000)
       setTimeout(() => {
         setToasts(prev => prev.map(t => t.id === id && t.exit === '' ? { ...t, exit: 'auto' } : t))
         setTimeout(() => {
@@ -64,8 +64,8 @@ export function SocialToasts() {
   }, [])
 
   useEffect(() => {
-    // First toast after random 3-6s
-    const initialDelay = randBetween(3000, 6000)
+    // First toast after random 8-15s
+    const initialDelay = randBetween(8000, 15000)
     timeoutRef.current = setTimeout(() => {
       const id = Date.now()
       const data = toastData[0]
@@ -74,7 +74,7 @@ export function SocialToasts() {
 
       setToasts([{ id, data, exit: '', timeLabel }])
 
-      const displayTime = randBetween(4000, 7000)
+      const displayTime = randBetween(2500, 4000)
       setTimeout(() => {
         setToasts(prev => prev.map(t => t.id === id && t.exit === '' ? { ...t, exit: 'auto' } : t))
         setTimeout(() => {
@@ -116,11 +116,11 @@ export function SocialToasts() {
           }`}
         >
           <div className="w-8 h-8 is-rounded overflow-hidden shrink-0" style={{ borderRadius: '9999px' }}>
-            <img src={toast.data.img} alt="" className="is-rounded w-full h-full object-cover" style={{ borderRadius: '9999px' }} loading="lazy" />
+            <img src={toast.data.img} alt="" width={32} height={32} className="is-rounded w-full h-full object-cover" style={{ borderRadius: '9999px' }} loading="lazy" />
           </div>
-          <div className="text-[.78rem] text-ajax-black/40 leading-[1.4]">
+          <div className="text-[.78rem] text-ajax-black/60 leading-[1.4]">
             <strong className="text-ajax-black font-semibold">{toast.data.name}</strong> de {toast.data.city} {toast.data.action}
-            <div className="text-[.65rem] text-ajax-black/50 mt-0.5">{toast.timeLabel}</div>
+            <div className="text-[.65rem] text-ajax-black/60 mt-0.5">{toast.timeLabel}</div>
           </div>
         </div>
       ))}

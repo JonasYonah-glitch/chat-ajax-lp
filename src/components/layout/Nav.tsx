@@ -112,6 +112,8 @@ export function Nav() {
           <img
             src="/Logos/logo ajax hub preto.svg"
             alt="Ajax Hub"
+            width={120}
+            height={40}
             className="h-8 md:h-10"
           />
         </Link>

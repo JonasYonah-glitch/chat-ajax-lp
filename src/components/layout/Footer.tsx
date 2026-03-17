@@ -23,6 +23,8 @@ export function Footer() {
             <img
               src="/Logos/logo ajax hub branco.svg"
               alt="Ajax Hub"
+              width={140}
+              height={56}
               className="h-12 md:h-14"
             />
             <p className="text-xs uppercase tracking-[0.15em] text-white/50 font-bold max-w-[260px]">

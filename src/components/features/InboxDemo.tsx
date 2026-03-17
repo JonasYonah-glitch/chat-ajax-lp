@@ -42,7 +42,7 @@ export function InboxDemo() {
                   <Icon size={10} fill={row.iconColor} />
                 </span>
               </div>
-              <div className="text-[.75rem] text-ajax-black/50 whitespace-nowrap overflow-hidden text-ellipsis">{row.msg}</div>
+              <div className="text-[.75rem] text-ajax-black/60 whitespace-nowrap overflow-hidden text-ellipsis">{row.msg}</div>
             </div>
 
             <div className="text-right shrink-0">

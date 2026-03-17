@@ -121,7 +121,7 @@ export function HeroSection() {
           <button
             onClick={() => scrollTargetRef.current?.scrollIntoView({ behavior: 'smooth' })}
             aria-label="Rolar para baixo"
-            className="w-11 h-11 border border-ajax-black/20 flex items-center justify-center text-ajax-black/40 transition-colors duration-200 hover:bg-ajax-purple hover:border-ajax-purple hover:text-white animate-[float_2s_ease-in-out_infinite]"
+            className="w-11 h-11 border border-ajax-black/20 flex items-center justify-center text-ajax-black/60 transition-colors duration-200 hover:bg-ajax-purple hover:border-ajax-purple hover:text-white animate-[float_2s_ease-in-out_infinite]"
           >
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v12M2 8l5 5 5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="square" /></svg>
           </button>

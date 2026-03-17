@@ -70,7 +70,7 @@ export function FeatureRow({ reverse, tag, title, description, features, ctaText
               <Button href="#start" variant="primary" size="small">
                 {ctaText} <ArrowIcon size={16} />
               </Button>
-              {ctaNote && <span className="text-[.78rem] text-ajax-black/50/50 font-medium">{ctaNote}</span>}
+              {ctaNote && <span className="text-[.78rem] text-ajax-black/60/50 font-medium">{ctaNote}</span>}
             </div>
           </div>
 

@@ -17,7 +17,7 @@ export default function TermosPage() {
             <h1 className="text-[clamp(1.8rem,4vw,2.8rem)] font-[800] text-ajax-black mb-2 uppercase tracking-[.02em]">
               Termos de <span className="serif-i">Uso</span>
             </h1>
-            <p className="text-ajax-black/50 text-[.85rem] mb-10 uppercase tracking-[.04em] font-semibold">Ultima atualizacao: 01 de marco de 2026</p>
+            <p className="text-ajax-black/60 text-[.85rem] mb-10 uppercase tracking-[.04em] font-semibold">Ultima atualizacao: 01 de marco de 2026</p>
 
             <div className="prose-custom">
               <h2>1. Aceitacao dos Termos</h2>

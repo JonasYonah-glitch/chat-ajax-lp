@@ -181,6 +181,8 @@ export function TestimonialCarousel() {
                     <img
                       src={t.avatar}
                       alt={t.name}
+                      width={260}
+                      height={347}
                       className="relative z-[1] w-[65%] max-md:w-[45%] aspect-[3/4] object-cover object-top"
                       loading="lazy"
                     />

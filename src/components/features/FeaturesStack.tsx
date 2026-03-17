@@ -82,7 +82,8 @@ export function FeaturesStack() {
 
     const ctx = gsap.context(() => {
       const total = cards.length
-      const wrapperHeight = (total - 1) * scrollPer + window.innerHeight + 200
+      const extraScroll = isMobile ? 0 : 300
+      const wrapperHeight = (total - 1) * scrollPer + window.innerHeight + 200 + extraScroll
 
       gsap.set(wrapperRef.current, { height: wrapperHeight })
 
@@ -90,6 +91,9 @@ export function FeaturesStack() {
       cards.forEach((card, i) => {
         if (i > 0) gsap.set(card, { opacity: 0, y: 30 })
       })
+
+      // Query video boxes for scale animation (desktop only)
+      const videoBoxes = contentRef.current!.querySelectorAll<HTMLElement>('.video-box')
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -101,7 +105,13 @@ export function FeaturesStack() {
         },
       })
 
-      tl.to({}, { duration: 0.3 })
+      if (!isMobile && videoBoxes.length > 0) {
+        // Subtle scale-up when entering section (GPU-composited, smooth)
+        tl.fromTo(videoBoxes, { scale: 1 }, { scale: 1.15, duration: 0.6, ease: 'sine.inOut' })
+        tl.to({}, { duration: 0.1 })
+      } else {
+        tl.to({}, { duration: 0.3 })
+      }
 
       for (let i = 0; i < total - 1; i++) {
         tl.to(cards[i], { opacity: 0, y: -20, duration: 0.5, ease: 'power1.inOut' }, `f-${i}`)
@@ -109,7 +119,13 @@ export function FeaturesStack() {
         if (i < total - 2) tl.to({}, { duration: 0.25 })
       }
 
-      tl.to({}, { duration: 0.3 })
+      if (!isMobile && videoBoxes.length > 0) {
+        // Subtle scale-down when leaving section
+        tl.to({}, { duration: 0.1 })
+        tl.to(videoBoxes, { scale: 1, duration: 0.6, ease: 'sine.inOut' })
+      } else {
+        tl.to({}, { duration: 0.3 })
+      }
     })
 
     return () => ctx.revert()
@@ -118,7 +134,7 @@ export function FeaturesStack() {
   return (
     <section ref={sectionRef} className="bg-white relative" id="recursos">
       <div ref={wrapperRef} className="relative">
-        <div className="sticky top-0 min-h-screen max-md:min-h-0 max-md:py-10 flex items-center max-md:items-start">
+        <div className="sticky top-0 min-h-screen max-md:min-h-0 max-md:pt-20 max-md:pb-10 flex items-center max-md:items-start">
           <Container>
             <div ref={contentRef} className="relative max-w-5xl mx-auto">
               {features.map((f, i) => (
@@ -186,7 +202,7 @@ function FeatureCard({ feature }: { feature: typeof features[0] }) {
       {/* Video 9:16 — below text on mobile, right on desktop */}
       <div className="flex justify-center" ref={containerRef}>
         <div
-          className="relative overflow-hidden bg-ajax-black w-full max-w-[280px] max-md:max-w-[240px] border-2 border-ajax-black/10 shadow-[4px_4px_0_#5E17EB]"
+          className="video-box relative overflow-hidden bg-ajax-black w-full max-w-[280px] max-md:max-w-[240px] border-2 border-ajax-black/10 shadow-[4px_4px_0_#5E17EB]"
           style={{ aspectRatio: '9/16' }}
         >
           <video

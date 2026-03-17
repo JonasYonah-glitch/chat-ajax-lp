@@ -46,7 +46,7 @@ function Person({ bubble, img, bubblePos, active }: { bubble: string; img: strin
         } w-20 h-20 max-md:w-[46px] max-md:h-[46px]`}
         style={{ borderRadius: '9999px' }}
       >
-        <img src={img} alt="" className="is-rounded w-full h-full object-cover" style={{ borderRadius: '9999px' }} loading="lazy" />
+        <img src={img} alt="" width={80} height={80} className="is-rounded w-full h-full object-cover" style={{ borderRadius: '9999px' }} loading="lazy" />
       </div>
 
       {/* Speech bubble below */}
